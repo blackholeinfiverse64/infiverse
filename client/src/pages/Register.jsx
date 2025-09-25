@@ -338,58 +338,35 @@
 // }
 
 
-"use client"
-
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-
-import { Button } from "../components/ui/button"
-import { AuthButton } from "../components/ui/AuthButton"
-import { Input } from "../components/ui/input"
-import { Label } from "../components/ui/label"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
-import { Loader2, Mail } from "lucide-react"
-import { api } from "../lib/api"
-import { Alert, AlertDescription, AlertTitle } from "../components/ui/alert"
+import { AuthButton } from "@/components/ui/AuthButton"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useAuth } from "@/context/auth-context"
+import { api } from "../lib/api"
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    department: "",
-    role: "User",
+    name: "", email: "", password: "", confirmPassword: "", department: "", role: "User"
   })
-
-  const [errors, setErrors] = useState({})
   const [departments, setDepartments] = useState([])
+  const [errors, setErrors] = useState({})
   const [success, setSuccess] = useState(false)
+
   const { register, loading } = useAuth()
-  const [forceTheme, setForceTheme] = useState("");
 
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
         const response = await api.departments.getDepartments()
-        console.log('Register - Departments response:', response)
-
-        // Handle new API response format
-        const data = response.success ? response.data : response
-        const departmentsArray = Array.isArray(data) ? data : []
-
-        setDepartments(departmentsArray)
-        if (departmentsArray.length > 0 && !formData.department) {
-          setFormData((prev) => ({ ...prev, department: departmentsArray[0]._id }))
-        }
-      } catch (err) {
-        console.error("Error fetching departments:", err)
+        setDepartments(response.data || [])
+      } catch {
         setDepartments([])
       }
     }
-
     fetchDepartments()
   }, [])
 
@@ -399,47 +376,15 @@ export default function Register() {
     if (errors[name]) setErrors({ ...errors, [name]: "" })
   }
 
-  const handleDepartmentChange = (value) => {
-    setFormData({ ...formData, department: value })
-    if (errors.department) setErrors({ ...errors, department: "" })
-  }
-
-  const handleRoleChange = (value) => {
-    setFormData({ ...formData, role: value })
-    if (errors.role) setErrors({ ...errors, role: "" })
-
-    // Clear department if role is Admin/Manager
-    if (value === "Admin" || value === "Manager") {
-      setFormData((prev) => ({ ...prev, department: "" }))
-    } else if (departments.length > 0) {
-      setFormData((prev) => ({ ...prev, department: departments[0].id }))
-    }
-  }
-
   const validateForm = () => {
     const newErrors = {}
-
-    if (!formData.name.trim()) newErrors.name = "Name is required"
-    if (!formData.email) {
-      newErrors.email = "Email is required"
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid"
-    }
-
-    if (!formData.password) {
-      newErrors.password = "Password is required"
-    } else if (formData.password.length < 3) {
-      newErrors.password = "Password must be at least 3 characters"
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match"
-    }
-
-    if (formData.role === "User" && !formData.department) newErrors.department = "Please select a department"
-
-    if (!formData.role) newErrors.role = "Please select a role"
-
+    if (!formData.name) newErrors.name = "Name required"
+    if (!formData.email) newErrors.email = "Email required"
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email"
+    if (!formData.password) newErrors.password = "Password required"
+    else if (formData.password.length < 3) newErrors.password = "Password too short"
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords don’t match"
+    if (formData.role === "User" && !formData.department) newErrors.department = "Department required"
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -447,304 +392,94 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (validateForm()) {
-      const { confirmPassword, ...registerData } = formData
       try {
-        await register(registerData)
+        const { confirmPassword, ...data } = formData
+        await register(data)
         setSuccess(true)
-      } catch (error) {
-        console.error("Registration error:", error)
+      } catch (err) {
+        console.error(err)
       }
     }
   }
 
-  const getRoleDescription = (role) => {
-    switch (role) {
-      case "Admin":
-        return "Access the organization dashboard, assign tasks, review progress, and generate reports."
-      case "Manager":
-        return "Manage department tasks, review team progress, and generate department reports."
-      case "User":
-        return "Receive tasks from admins and update your progress on a daily basis."
-      default:
-        return ""
-    }
-  }
-
-  useEffect(() => {
-    const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setForceTheme(isSystemDark ? "light" : "dark");
-  }, []);
-
   return (
-    <div className="auth-container cyber-particles">
-      {/* Floating Cyber Orbs */}
+    <div className="min-h-screen flex items-center justify-center bg-cyber-grid relative">
       <div className="floating-orbs"></div>
-      
-      {/* Floating Cyber Elements */}
-      <div className="absolute top-10 right-10 w-32 h-32 bg-accent/15 rounded-full blur-xl animate-float glow-accent"></div>
-      <div className="absolute bottom-10 left-10 w-40 h-40 bg-primary/15 rounded-full blur-xl animate-float glow-primary" style={{animationDelay: '3s'}}></div>
-      <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-secondary/10 rounded-full blur-xl animate-float glow-secondary" style={{animationDelay: '1s'}}></div>
 
-      <Card className="auth-card" style={{ maxWidth: '32rem' }}>
-        <CardHeader className="space-y-1 text-center relative z-10">
-          <div className="auth-logo" style={{ background: 'var(--gradient-accent)' }}>
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-            </svg>
-          </div>
-          <CardTitle className="text-4xl font-bold gradient-text mb-2">
-            Join CyberFlow
-          </CardTitle>
-          <CardDescription className="text-muted-foreground text-lg">
-            Create your account to access the <span className="text-accent">future of workflow</span> management
-          </CardDescription>
+      <Card className="cyber-card glass glow-accent w-full max-w-2xl z-10">
+        <CardHeader className="text-center space-y-2">
+          <CardTitle className="text-3xl font-bold gradient-text">Create Account</CardTitle>
+          <CardDescription>Join and manage your <span className="text-accent">workflow</span></CardDescription>
         </CardHeader>
-        <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-          <CardContent className="space-y-6">
-            {success && (
-              <div className="auth-success">
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  <h4 className="font-semibold">Registration successful!</h4>
-                </div>
-                <p className="mt-2 text-sm">
-                  A welcome email has been sent to {formData.email} with details about your role and responsibilities.
-                </p>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="name">Full Name</Label>
+                <Input id="name" name="name" value={formData.name} onChange={handleChange} className={`cyber-input ${errors.name ? "border-destructive" : ""}`} />
+                {errors.name && <p className="auth-error">{errors.name}</p>}
+              </div>
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} className={`cyber-input ${errors.email ? "border-destructive" : ""}`} />
+                {errors.email && <p className="auth-error">{errors.email}</p>}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="password">Password</Label>
+                <Input id="password" name="password" type="password" value={formData.password} onChange={handleChange} className={`cyber-input ${errors.password ? "border-destructive" : ""}`} />
+                {errors.password && <p className="auth-error">{errors.password}</p>}
+              </div>
+              <div>
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input id="confirmPassword" name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} className={`cyber-input ${errors.confirmPassword ? "border-destructive" : ""}`} />
+                {errors.confirmPassword && <p className="auth-error">{errors.confirmPassword}</p>}
+              </div>
+            </div>
+
+            <div>
+              <Label>Role</Label>
+              <Select value={formData.role} onValueChange={(v) => setFormData({ ...formData, role: v })}>
+                <SelectTrigger className="cyber-input">
+                  <SelectValue placeholder="Select Role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Admin">Admin</SelectItem>
+                  <SelectItem value="Manager">Manager</SelectItem>
+                  <SelectItem value="User">User</SelectItem>
+                </SelectContent>
+              </Select>
+              {errors.role && <p className="auth-error">{errors.role}</p>}
+            </div>
+
+            {formData.role === "User" && (
+              <div>
+                <Label>Department</Label>
+                <Select value={formData.department} onValueChange={(v) => setFormData({ ...formData, department: v })}>
+                  <SelectTrigger className="cyber-input">
+                    <SelectValue placeholder="Select Department" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {departments.map((d) => (
+                      <SelectItem key={d._id} value={d._id}>{d.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {errors.department && <p className="auth-error">{errors.department}</p>}
               </div>
             )}
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="auth-input-group">
-                <Label htmlFor="name" className="text-sm font-medium text-foreground/80 mb-2 block">
-                  Full Name
-                </Label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="John Doe"
-                  value={formData.name}
-                  onChange={handleChange}
-                  disabled={loading || success}
-                  className={`auth-input ${
-                    errors.name ? "border-destructive focus:border-destructive" : ""
-                  }`}
-                />
-                {errors.name && (
-                  <p className="auth-error">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
-                    {errors.name}
-                  </p>
-                )}
-              </div>
-
-              <div className="auth-input-group">
-                <Label htmlFor="email" className="text-sm font-medium text-foreground/80 mb-2 block">
-                  Email Address
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="name@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  disabled={loading || success}
-                  className={`auth-input ${
-                    errors.email ? "border-destructive focus:border-destructive" : ""
-                  }`}
-                />
-                {errors.email && (
-                  <p className="auth-error">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
-                    {errors.email}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="auth-input-group">
-                <Label htmlFor="password" className="text-sm font-medium text-foreground/80 mb-2 block">
-                  Password
-                </Label>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={formData.password}
-                  onChange={handleChange}
-                  disabled={loading || success}
-                  className={`auth-input ${
-                    errors.password ? "border-destructive focus:border-destructive" : ""
-                  }`}
-                />
-                {errors.password && (
-                  <p className="auth-error">{errors.password}</p>
-                )}
-              </div>
-
-              <div className="auth-input-group">
-                <Label htmlFor="confirmPassword" className="text-sm font-medium text-foreground/80 mb-2 block">
-                  Confirm Password
-                </Label>
-                <Input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="••••••••"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  disabled={loading || success}
-                  className={`auth-input ${
-                    errors.confirmPassword ? "border-destructive focus:border-destructive" : ""
-                  }`}
-                />
-                {errors.confirmPassword && (
-                  <p className="auth-error">{errors.confirmPassword}</p>
-                )}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="auth-input-group">
-                <Label htmlFor="role" className="text-sm font-medium text-foreground/80 mb-2 block">
-                  Role
-                </Label>
-                <Select value={formData.role} onValueChange={handleRoleChange} disabled={loading || success}>
-                  <SelectTrigger
-                    className={`cyber-select ${errors.role ? "border-destructive" : ""}`}
-                  >
-                    <SelectValue placeholder="Select a role" />
-                  </SelectTrigger>
-                  <SelectContent className="glass border border-border/50 shadow-lg max-h-60 overflow-y-auto">
-                    <SelectItem value="Admin" className="focus:bg-primary/10 hover:bg-primary/5">
-                      Admin
-                    </SelectItem>
-                    <SelectItem value="Manager" className="focus:bg-primary/10 hover:bg-primary/5">
-                      Manager
-                    </SelectItem>
-                    <SelectItem value="User" className="focus:bg-primary/10 hover:bg-primary/5">
-                      User
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors.role && <p className="auth-error">{errors.role}</p>}
-                {formData.role && (
-                  <p className="text-xs text-muted-foreground mt-2 p-2 bg-muted/20 rounded border border-border/30">
-                    {getRoleDescription(formData.role)}
-                  </p>
-                )}
-              </div>
-
-              {/* <div className="space-y-2">
-                <Label htmlFor="department">Department</Label>
-                <Select
-                  value={formData.department}
-                  onValueChange={handleDepartmentChange}
-                  disabled={loading || success || formData.role !== "User"}
-                >
-                  <SelectTrigger
-                    className={`bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:border-primary transition-colors ${errors.department ? "border-red-500" : ""}`}
-                  >
-                    <SelectValue placeholder="Select a department" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md shadow-lg max-h-60 overflow-y-auto">
-                    {departments.map((dept) => (
-                      <SelectItem
-                        key={dept.id}
-                        value={dept.id}
-                        className="hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 transition-colors"
-                      >
-                        {dept.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {errors.department && <p className="text-sm text-red-500">{errors.department}</p>}
-                {formData.role === "User" && (
-                  <p className="text-xs text-muted-foreground mt-1">
-                    You'll receive tasks from this department's manager.
-                  </p>
-                )}
-              </div> */}
-              <div className="auth-input-group">
-                <Label htmlFor="department" className="text-sm font-medium text-foreground/80 mb-2 block">
-                  Department
-                </Label>
-                <Select
-                  value={formData.department}
-                  onValueChange={handleDepartmentChange}
-                  disabled={loading || formData.role !== "User"}
-                >
-                  <SelectTrigger
-                    className={`cyber-select ${errors.department ? "border-destructive" : ""} ${
-                      formData.role !== "User" ? "opacity-50" : ""
-                    }`}
-                  >
-                    <SelectValue placeholder="Select a department" />
-                  </SelectTrigger>
-                  <SelectContent className="glass border border-border/50 shadow-lg max-h-60 overflow-y-auto">
-                    {departments.map((dept) => (
-                      <SelectItem
-                        key={dept._id}
-                        value={dept._id}
-                        className="focus:bg-primary/10 hover:bg-primary/5"
-                      >
-                        {dept.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {errors.department && (
-                  <p className="auth-error">{errors.department}</p>
-                )}
-                {formData.role === "User" && (
-                  <p className="text-xs text-muted-foreground mt-2 p-2 bg-muted/20 rounded border border-border/30">
-                    You'll receive tasks from this department's manager.
-                  </p>
-                )}
-              </div>
-            </div>
           </CardContent>
-          <CardFooter className="flex flex-col space-y-4 relative z-10">
-            {!success && (
-              <AuthButton
-                type="submit"
-                loading={loading}
-                disabled={loading}
-              >
-                {loading ? (
-                  "Creating account..."
-                ) : (
-                  <>
-                    <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                    </svg>
-                    Join CyberFlow
-                  </>
-                )}
-              </AuthButton>
-            )}
-            {success && (
-              <Link to="/login" className="w-full">
-                <AuthButton className="w-full">
-                  <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                  </svg>
-                  Continue to Login
-                </AuthButton>
-              </Link>
-            )}
-            <p className="text-center text-sm text-muted-foreground">
+
+          <CardFooter className="flex flex-col space-y-4">
+            <AuthButton type="submit" loading={loading} disabled={loading} className="w-full">
+              {loading ? "Registering..." : "Sign Up"}
+            </AuthButton>
+            <p className="text-sm text-center">
               Already have an account?{" "}
-              <Link to="/login" className="auth-link">
-                Login
-              </Link>
+              <Link to="/login" className="auth-link">Login</Link>
             </p>
           </CardFooter>
         </form>
@@ -752,4 +487,3 @@ export default function Register() {
     </div>
   )
 }
-
