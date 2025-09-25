@@ -36,6 +36,8 @@ export default function SplashScreen() {
       {/* Background elements */}
       <div className="splash-background"></div>
       <div className="splash-particles"></div>
+      <div className="splash-particles-medium"></div>
+      <div className="splash-particles-large"></div>
       
       {/* Main content */}
       <div className="splash-content">

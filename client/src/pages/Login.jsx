@@ -45,9 +45,11 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center auth-gradient relative p-4">
-      {/* Enhanced background elements */}
-      <div className="auth-background-elements"></div>
+    <div className="min-h-screen w-full flex items-center justify-center universe-background relative p-4">
+      {/* Universe particle background */}
+      <div className="universe-particles"></div>
+      <div className="universe-particles-medium"></div>
+      <div className="universe-particles-large"></div>
 
       <Card className="cyber-card glass glow-primary w-full max-w-md z-10">
         <CardHeader className="space-y-2 text-center">
