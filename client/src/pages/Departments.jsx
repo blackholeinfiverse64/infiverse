@@ -24,9 +24,25 @@ function Departments() {
   }
 
   return (
-    <div className="space-y-6">
-      <DepartmentHeader />
-      <DepartmentList onDepartmentSelect={handleDepartmentSelect} />
+    <div className="space-y-6 electric-dashboard">
+      {/* Electric Background Particles */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="electric-particles opacity-20"></div>
+        <div className="electric-particles-small opacity-15"></div>
+      </div>
+
+      <div className="electric-header p-6 rounded-2xl relative z-10">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-2xl"></div>
+        <div className="absolute inset-0 bg-cyber-grid opacity-10 rounded-2xl"></div>
+        <div className="relative z-10">
+          <DepartmentHeader />
+        </div>
+      </div>
+      
+      <div className="electric-section relative z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <DepartmentList onDepartmentSelect={handleDepartmentSelect} />
+      </div>
     </div>
   );
 }

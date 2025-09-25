@@ -284,14 +284,23 @@ function UserDashboard() {
       hasNewReviews={hasNewReviews}
       markReviewsAsSeen={markReviewsAsSeen}
     >
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">My Dashboard</h1>
+      <div className="space-y-6 electric-dashboard">
+        {/* Electric Background Particles */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+          <div className="electric-particles opacity-20"></div>
+          <div className="electric-particles-small opacity-15"></div>
+        </div>
+
+        <div className="flex items-center justify-between electric-header p-6 rounded-2xl relative z-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-2xl"></div>
+          <div className="absolute inset-0 bg-cyber-grid opacity-10 rounded-2xl"></div>
+          
+          <div className="relative z-10">
+            <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-text">My Dashboard</h1>
             <p className="text-muted-foreground">Welcome back, {user?.name || "User"}! Here's your task overview.</p>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={fetchUserDashboardData}>
+          <div className="flex gap-2 relative z-10">
+            <Button variant="outline" onClick={fetchUserDashboardData} className="electric-button-outline hover:electric-glow transition-all duration-300 hover:transform hover:scale-105">
               <RefreshCw className="mr-2 h-4 w-4" />
               Refresh
             </Button>

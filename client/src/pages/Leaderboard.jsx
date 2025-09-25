@@ -116,12 +116,23 @@ const Leaderboard = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <Card>
-        <CardHeader>
-          <CardTitle>Task Completion Leaderboard</CardTitle>
+    <div className="container mx-auto p-4 electric-dashboard">
+      {/* Electric Background Particles */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="electric-particles opacity-20"></div>
+        <div className="electric-particles-small opacity-15"></div>
+      </div>
+
+      <Card className="electric-card relative z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10"></div>
+        <div className="absolute inset-0 bg-cyber-grid opacity-20"></div>
+        
+        <CardHeader className="relative z-10">
+          <CardTitle className="text-2xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-text">
+            Task Completion Leaderboard
+          </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="relative z-10">
           {isLoading ? (
             <div>Loading...</div>
           ) : (
@@ -141,7 +152,7 @@ const Leaderboard = () => {
                 {leaderboard.map((user, index) => (
                   <TableRow
                     key={user._id}
-                    className="cursor-pointer hover:bg-gray-100"
+                    className="cursor-pointer hover:electric-hover transition-all duration-300 hover:transform hover:scale-[1.02]"
                     onClick={() => handleUserClick(user)}
                   >
                     <TableCell>{getRankBadge(index)}</TableCell>

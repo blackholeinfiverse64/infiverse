@@ -98,6 +98,613 @@
     box-shadow: var(--shadow-secondary-glow); 
   }
 
+  /* Electric Sidebar Effects */
+  .electric-sidebar {
+    background: linear-gradient(145deg, 
+      hsl(220 27% 6% / 0.95) 0%, 
+      hsl(220 20% 8% / 0.9) 50%, 
+      hsl(220 27% 6% / 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border-right: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+  }
+
+  .electric-sidebar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: linear-gradient(180deg, 
+      hsl(195 100% 50% / 0.5) 0%,
+      hsl(280 100% 50% / 0.3) 50%,
+      hsl(142 100% 50% / 0.5) 100%);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    pointer-events: none;
+  }
+
+  .shadow-electric {
+    box-shadow: 
+      0 0 20px hsl(195 100% 50% / 0.2),
+      0 0 40px hsl(280 100% 50% / 0.1),
+      0 0 60px hsl(142 100% 50% / 0.05);
+  }
+
+  .electric-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, hsl(195 100% 50%), transparent),
+      radial-gradient(2px 2px at 40px 70px, hsl(280 100% 50%), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(142 100% 50%), transparent),
+      radial-gradient(1px 1px at 130px 80px, hsl(195 100% 50%), transparent),
+      radial-gradient(2px 2px at 160px 30px, hsl(280 100% 50%), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: electric-drift 20s linear infinite;
+    opacity: 0.6;
+  }
+
+  .electric-particles-small {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(1px 1px at 25px 25px, hsl(195 100% 50%), transparent),
+      radial-gradient(1px 1px at 75px 75px, hsl(280 100% 50%), transparent),
+      radial-gradient(1px 1px at 125px 25px, hsl(142 100% 50%), transparent);
+    background-repeat: repeat;
+    background-size: 150px 150px;
+    animation: electric-drift 15s linear infinite reverse;
+    opacity: 0.4;
+  }
+
+  @keyframes electric-drift {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-100px); }
+  }
+
+  .electric-active {
+    background: linear-gradient(135deg, 
+      hsl(195 100% 50% / 0.2) 0%,
+      hsl(280 100% 50% / 0.15) 50%,
+      hsl(142 100% 50% / 0.2) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.3);
+  }
+
+  .electric-inactive {
+    background: linear-gradient(135deg, 
+      hsl(220 20% 8% / 0.5) 0%,
+      hsl(220 15% 10% / 0.3) 100%);
+    border: 1px solid hsl(220 15% 20% / 0.5);
+  }
+
+  .electric-hover:hover {
+    background: linear-gradient(135deg, 
+      hsl(195 100% 50% / 0.1) 0%,
+      hsl(280 100% 50% / 0.08) 50%,
+      hsl(142 100% 50% / 0.1) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.2);
+    transform: translateX(4px);
+  }
+
+  .hover-electric:hover {
+    background: linear-gradient(135deg, 
+      hsl(195 100% 50% / 0.1) 0%,
+      hsl(280 100% 50% / 0.08) 100%);
+    border-color: hsl(195 100% 50% / 0.3);
+    transform: translateX(2px);
+  }
+
+  .electric-glow {
+    box-shadow: 
+      0 0 10px hsl(195 100% 50% / 0.5),
+      0 0 20px hsl(195 100% 50% / 0.3),
+      0 0 30px hsl(195 100% 50% / 0.1);
+  }
+
+  .shadow-accent-glow {
+    box-shadow: 
+      0 0 10px hsl(142 100% 50% / 0.8),
+      0 0 20px hsl(142 100% 50% / 0.4);
+  }
+
+  @keyframes electric-pulse {
+    0%, 100% { 
+      opacity: 0.8;
+      box-shadow: 
+        0 0 10px hsl(195 100% 50% / 0.3),
+        0 0 20px hsl(195 100% 50% / 0.2);
+    }
+    50% { 
+      opacity: 1;
+      box-shadow: 
+        0 0 15px hsl(195 100% 50% / 0.5),
+        0 0 30px hsl(195 100% 50% / 0.3),
+        0 0 45px hsl(195 100% 50% / 0.1);
+    }
+  }
+
+  .animate-electric-pulse {
+    animation: electric-pulse 2s ease-in-out infinite;
+  }
+
+  .electric-workspace {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .electric-workspace::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, 
+      transparent 30%, 
+      hsl(195 100% 50% / 0.1) 50%, 
+      transparent 70%);
+    animation: electric-scan 3s ease-in-out infinite;
+  }
+
+  @keyframes electric-scan {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+  }
+
+  .electric-profile {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .electric-profile::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(195 100% 50% / 0.2), 
+      transparent);
+    animation: electric-sweep 4s ease-in-out infinite;
+  }
+
+  @keyframes electric-sweep {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  .electric-logout:hover {
+    box-shadow: 
+      0 0 10px hsl(0 100% 50% / 0.3),
+      0 0 20px hsl(0 100% 50% / 0.2);
+  }
+
+  @keyframes gradient-text {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .animate-gradient-text {
+    background-size: 200% 200%;
+    animation: gradient-text 3s ease infinite;
+  }
+
+  /* Electric Dashboard Effects */
+  .electric-dashboard {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .electric-header {
+    background: linear-gradient(135deg, 
+      hsl(220 27% 6% / 0.8) 0%, 
+      hsl(220 20% 8% / 0.6) 50%, 
+      hsl(220 27% 6% / 0.8) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(195 100% 50% / 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .electric-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(195 100% 50% / 0.1), 
+      transparent);
+    animation: electric-header-sweep 6s ease-in-out infinite;
+  }
+
+  @keyframes electric-header-sweep {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  .electric-button {
+    background: linear-gradient(135deg, 
+      hsl(195 100% 50%) 0%, 
+      hsl(280 100% 50%) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .electric-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, 
+      transparent 30%, 
+      hsl(255 255 255 / 0.2) 50%, 
+      transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .electric-button:hover::before {
+    transform: translateX(100%);
+  }
+
+  .electric-button-outline {
+    background: linear-gradient(135deg, 
+      hsl(220 20% 8% / 0.8) 0%, 
+      hsl(220 15% 10% / 0.6) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .electric-button-outline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, 
+      transparent 30%, 
+      hsl(195 100% 50% / 0.1) 50%, 
+      transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .electric-button-outline:hover::before {
+    transform: translateX(100%);
+  }
+
+  .electric-card {
+    background: linear-gradient(135deg, 
+      hsl(220 27% 6% / 0.9) 0%, 
+      hsl(220 20% 8% / 0.8) 50%, 
+      hsl(220 27% 6% / 0.9) 100%);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .electric-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+      hsl(195 100% 50% / 0.3) 0%,
+      hsl(280 100% 50% / 0.2) 50%,
+      hsl(142 100% 50% / 0.3) 100%);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    pointer-events: none;
+  }
+
+  .electric-card-glow {
+    background: radial-gradient(circle at center, 
+      hsl(195 100% 50% / 0.1) 0%, 
+      transparent 70%);
+  }
+
+  .electric-card-glow-accent {
+    background: radial-gradient(circle at center, 
+      hsl(142 100% 50% / 0.1) 0%, 
+      transparent 70%);
+  }
+
+  .electric-card-glow-secondary {
+    background: radial-gradient(circle at center, 
+      hsl(280 100% 50% / 0.1) 0%, 
+      transparent 70%);
+  }
+
+  .electric-card-glow-destructive {
+    background: radial-gradient(circle at center, 
+      hsl(0 100% 50% / 0.1) 0%, 
+      transparent 70%);
+  }
+
+  .electric-section {
+    position: relative;
+    transition: all 0.5s ease;
+  }
+
+  .electric-section:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Enhanced fade-in animation */
+  @keyframes fade-in {
+    from { 
+      opacity: 0; 
+      transform: translateY(20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+
+  /* Electric scan animation for workspace sections */
+  @keyframes electric-section-scan {
+    0%, 100% { 
+      background-position: -200% center;
+    }
+    50% { 
+      background-position: 200% center;
+    }
+  }
+
+  .electric-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(195 100% 50% / 0.05), 
+      transparent);
+    background-size: 200% 100%;
+    animation: electric-section-scan 8s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .electric-section:hover::after {
+    opacity: 1;
+  }
+
+  /* Electric Layout Effects */
+  .electric-layout {
+    position: relative;
+    background: radial-gradient(ellipse at top, 
+      hsl(220 27% 6%) 0%, 
+      hsl(220 20% 4%) 100%);
+  }
+
+  .electric-layout::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, hsl(195 100% 50% / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, hsl(280 100% 50% / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, hsl(142 100% 50% / 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Enhanced scrollbar styling */
+  .electric-layout ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .electric-layout ::-webkit-scrollbar-track {
+    background: hsl(220 20% 8%);
+    border-radius: 4px;
+  }
+
+  .electric-layout ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, 
+      hsl(195 100% 50% / 0.6) 0%, 
+      hsl(280 100% 50% / 0.6) 100%);
+    border-radius: 4px;
+    border: 1px solid hsl(220 15% 15%);
+  }
+
+  .electric-layout ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, 
+      hsl(195 100% 50% / 0.8) 0%, 
+      hsl(280 100% 50% / 0.8) 100%);
+  }
+
+  /* Electric Table Effects */
+  .electric-table {
+    background: linear-gradient(135deg, 
+      hsl(220 27% 6% / 0.9) 0%, 
+      hsl(220 20% 8% / 0.8) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .electric-table::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, 
+      transparent 30%, 
+      hsl(195 100% 50% / 0.05) 50%, 
+      transparent 70%);
+    animation: electric-table-scan 10s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes electric-table-scan {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+  }
+
+  .electric-table th {
+    background: linear-gradient(135deg, 
+      hsl(195 100% 50% / 0.1) 0%, 
+      hsl(280 100% 50% / 0.05) 100%);
+    border-bottom: 1px solid hsl(195 100% 50% / 0.3);
+    color: hsl(195 100% 70%);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+  }
+
+  .electric-table tr:hover {
+    background: linear-gradient(135deg, 
+      hsl(195 100% 50% / 0.05) 0%, 
+      hsl(280 100% 50% / 0.03) 100%);
+    transform: translateX(2px);
+    transition: all 0.2s ease;
+  }
+
+  .electric-table td {
+    border-bottom: 1px solid hsl(220 15% 20%);
+    transition: all 0.2s ease;
+  }
+
+  /* Electric Form Elements */
+  .electric-select {
+    background: linear-gradient(135deg, 
+      hsl(220 20% 8% / 0.9) 0%, 
+      hsl(220 15% 10% / 0.7) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.3);
+    color: hsl(200 25% 90%);
+  }
+
+  .electric-select:focus {
+    border-color: hsl(195 100% 50% / 0.6);
+    box-shadow: 0 0 10px hsl(195 100% 50% / 0.3);
+  }
+
+  .electric-input {
+    background: linear-gradient(135deg, 
+      hsl(220 20% 8% / 0.9) 0%, 
+      hsl(220 15% 10% / 0.7) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.3);
+    color: hsl(200 25% 90%);
+    transition: all 0.3s ease;
+  }
+
+  .electric-input:focus {
+    border-color: hsl(195 100% 50% / 0.6);
+    box-shadow: 0 0 15px hsl(195 100% 50% / 0.3);
+    transform: translateY(-1px);
+  }
+
+  .electric-input::placeholder {
+    color: hsl(200 15% 60%);
+  }
+
+  /* Electric Badge Effects */
+  .electric-badge {
+    background: linear-gradient(135deg, 
+      hsl(195 100% 50% / 0.2) 0%, 
+      hsl(280 100% 50% / 0.15) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.4);
+    color: hsl(195 100% 80%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .electric-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(195 100% 50% / 0.3), 
+      transparent);
+    animation: electric-badge-shine 2s ease-in-out infinite;
+  }
+
+  @keyframes electric-badge-shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  /* Electric Dialog/Modal Effects */
+  .electric-dialog {
+    background: linear-gradient(135deg, 
+      hsl(220 27% 6% / 0.95) 0%, 
+      hsl(220 20% 8% / 0.9) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.3);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .electric-dialog::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+      hsl(195 100% 50% / 0.4) 0%,
+      hsl(280 100% 50% / 0.2) 50%,
+      hsl(142 100% 50% / 0.4) 100%);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    pointer-events: none;
+  }
+
+  /* Responsive electric effects */
+  @media (max-width: 768px) {
+    .electric-particles,
+    .electric-particles-small {
+      opacity: 0.1;
+    }
+    
+    .electric-card-glow,
+    .electric-card-glow-accent,
+    .electric-card-glow-secondary,
+    .electric-card-glow-destructive {
+      opacity: 0.5;
+    }
+
+    .electric-table::before,
+    .electric-badge::before {
+      animation-duration: 6s;
+    }
+  }
+
+  /* Electric Loading States */
+  .electric-loading {
+    background: linear-gradient(90deg, 
+      hsl(195 100% 50% / 0.1) 0%,
+      hsl(195 100% 50% / 0.3) 50%,
+      hsl(195 100% 50% / 0.1) 100%);
+    background-size: 200% 100%;
+    animation: electric-loading 1.5s ease-in-out infinite;
+  }
+
+  @keyframes electric-loading {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
   /* Hover effects */
   .hover-glow {
     transition: var(--transition-smooth);

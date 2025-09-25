@@ -156,24 +156,34 @@ function Dashboard() {
   }
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in electric-dashboard">
+      {/* Electric Background Particles */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="electric-particles opacity-30"></div>
+        <div className="electric-particles-small opacity-20"></div>
+      </div>
+
       {/* Enhanced Header Section */}
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 electric-header p-6 rounded-2xl relative z-10">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-2xl"></div>
+        <div className="absolute inset-0 bg-cyber-grid opacity-10 rounded-2xl"></div>
+        
+        <div className="space-y-2 relative z-10">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-text">
             Dashboard
           </h1>
           <p className="text-lg text-muted-foreground">
             Welcome back! Here's an overview of your workflow.
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto relative z-10">
           <Button
             onClick={() => setIsCreateTaskOpen(true)}
-            className="gradient-primary hover:glow-primary transition-cyber transform hover:scale-105 group hover-cyber"
+            className="electric-button gradient-primary hover:glow-primary transition-all duration-300 transform hover:scale-105 group hover-electric relative overflow-hidden"
           >
-            <Plus className="mr-2 h-5 w-5 transition-cyber group-hover:rotate-90" />
-            Create New Task
+            <div className="absolute inset-0 bg-white/10 rounded-lg animate-electric-pulse"></div>
+            <Plus className="mr-2 h-5 w-5 transition-all duration-300 group-hover:rotate-90 relative z-10" />
+            <span className="relative z-10">Create New Task</span>
           </Button>
           
           {isAdmin && (
@@ -182,28 +192,30 @@ function Dashboard() {
                 variant="outline"
                 onClick={handleBroadcastReminders}
                 disabled={isSendingReminders}
-                className="neo-button hover:glow-accent transition-cyber"
+                className="electric-button-outline hover:electric-glow transition-all duration-300 hover:transform hover:scale-105 relative overflow-hidden"
               >
+                <div className="absolute inset-0 bg-gradient-to-r from-accent/10 to-primary/10 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 {isSendingReminders ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin relative z-10" />
                 ) : (
-                  <Mail className="mr-2 h-4 w-4" />
+                  <Mail className="mr-2 h-4 w-4 relative z-10" />
                 )}
-                Broadcast Reminders
+                <span className="relative z-10">Broadcast Reminders</span>
               </Button>
 
               <Button
                 variant="outline"
                 onClick={handleGenerateReports}
                 disabled={isGeneratingReports}
-                className="neo-button hover:glow-accent transition-cyber"
+                className="electric-button-outline hover:electric-glow transition-all duration-300 hover:transform hover:scale-105 relative overflow-hidden"
               >
+                <div className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-accent/10 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 {isGeneratingReports ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin relative z-10" />
                 ) : (
-                  <FileText className="mr-2 h-4 w-4" />
+                  <FileText className="mr-2 h-4 w-4 relative z-10" />
                 )}
-                Generate Reports
+                <span className="relative z-10">Generate Reports</span>
               </Button>
             </>
           )}
@@ -212,25 +224,29 @@ function Dashboard() {
             variant="outline"
             onClick={handleBroadcastAimReminders}
             disabled={isSendingAimReminders}
-            className="neo-button hover:glow-accent transition-cyber"
+            className="electric-button-outline hover:electric-glow transition-all duration-300 hover:transform hover:scale-105 relative overflow-hidden"
           >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
             {isSendingAimReminders ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className="mr-2 h-4 w-4 animate-spin relative z-10" />
             ) : (
-              <Target className="mr-2 h-4 w-4" />
+              <Target className="mr-2 h-4 w-4 relative z-10" />
             )}
-            Broadcast Aim Reminders
+            <span className="relative z-10">Broadcast Aim Reminders</span>
           </Button>
         </div>
       </div>
 
-      {/* Enhanced Cyber Stats Cards */}
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="neo-card hover-neo group relative overflow-hidden border-primary/20">
+      {/* Enhanced Electric Stats Cards */}
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 relative z-10">
+        <Card className="electric-card group relative overflow-hidden border-primary/30 hover:border-primary/50 transition-all duration-500 hover:transform hover:scale-105">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10"></div>
           <div className="absolute inset-0 bg-cyber-grid opacity-20"></div>
+          <div className="absolute inset-0 electric-card-glow opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 relative z-10">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Total Tasks</CardTitle>
-            <div className="p-3 gradient-primary rounded-2xl glow-primary group-hover:animate-glow-pulse transition-cyber transform group-hover:scale-110">
+            <CardTitle className="text-sm font-semibold text-primary/80 uppercase tracking-wider">Total Tasks</CardTitle>
+            <div className="p-3 gradient-primary rounded-2xl electric-glow group-hover:animate-electric-pulse transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-12">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -266,10 +282,14 @@ function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card className="card-modern hover-lift group border-green-500/10 hover:border-green-500/20 transition-all duration-300">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Completed Tasks</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-green-500/10 to-green-600/10 rounded-lg group-hover:from-green-500/20 group-hover:to-green-600/20 transition-all duration-300">
+        <Card className="electric-card group relative overflow-hidden border-accent/30 hover:border-accent/50 transition-all duration-500 hover:transform hover:scale-105">
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-primary/5 to-secondary/10"></div>
+          <div className="absolute inset-0 bg-cyber-grid opacity-20"></div>
+          <div className="absolute inset-0 electric-card-glow-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 relative z-10">
+            <CardTitle className="text-sm font-medium text-accent/80">Completed Tasks</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-accent/20 to-accent/30 rounded-lg electric-glow group-hover:animate-electric-pulse transition-all duration-300 transform group-hover:scale-110">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -278,14 +298,14 @@ function Dashboard() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                className="h-5 w-5 text-accent"
+                className="h-5 w-5 text-accent-foreground"
               >
                 <path d="M9 12l2 2 4-4" />
                 <circle cx="12" cy="12" r="10" />
               </svg>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="relative z-10">
             <div className="text-3xl font-bold text-foreground mb-1">{stats.completedTasks}</div>
             <p className={`text-sm flex items-center gap-1 ${
               stats.completedTasksChange >= 0 ? 'text-accent' : 'text-destructive'
@@ -304,10 +324,14 @@ function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card className="card-modern hover-lift group border-orange-500/10 hover:border-orange-500/20 transition-all duration-300">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-medium text-muted-foreground">In Progress</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-orange-500/10 to-orange-600/10 rounded-lg group-hover:from-orange-500/20 group-hover:to-orange-600/20 transition-all duration-300">
+        <Card className="electric-card group relative overflow-hidden border-secondary/30 hover:border-secondary/50 transition-all duration-500 hover:transform hover:scale-105">
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-accent/5 to-primary/10"></div>
+          <div className="absolute inset-0 bg-cyber-grid opacity-20"></div>
+          <div className="absolute inset-0 electric-card-glow-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 relative z-10">
+            <CardTitle className="text-sm font-medium text-secondary/80">In Progress</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-secondary/20 to-secondary/30 rounded-lg electric-glow group-hover:animate-electric-pulse transition-all duration-300 transform group-hover:scale-110">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -316,15 +340,15 @@ function Dashboard() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                className="h-5 w-5 text-orange-600"
+                className="h-5 w-5 text-secondary-foreground"
               >
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 6v6l4 2" />
               </svg>
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.inProgressTasks}</div>
+          <CardContent className="relative z-10">
+            <div className="text-2xl font-bold text-foreground">{stats.inProgressTasks}</div>
             <p className="text-xs text-muted-foreground">
               {stats.inProgressTasksChange > 0 ? "+" : ""}
               {stats.inProgressTasksChange} tasks since yesterday
@@ -332,24 +356,30 @@ function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pending Tasks</CardTitle>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="h-4 w-4 text-muted-foreground"
-            >
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-            </svg>
+        <Card className="electric-card group relative overflow-hidden border-destructive/30 hover:border-destructive/50 transition-all duration-500 hover:transform hover:scale-105">
+          <div className="absolute inset-0 bg-gradient-to-br from-destructive/10 via-primary/5 to-secondary/10"></div>
+          <div className="absolute inset-0 bg-cyber-grid opacity-20"></div>
+          <div className="absolute inset-0 electric-card-glow-destructive opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 relative z-10">
+            <CardTitle className="text-sm font-medium text-destructive/80">Pending Tasks</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-destructive/20 to-destructive/30 rounded-lg electric-glow group-hover:animate-electric-pulse transition-all duration-300 transform group-hover:scale-110">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                className="h-4 w-4 text-destructive-foreground"
+              >
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+              </svg>
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.pendingTasks}</div>
+          <CardContent className="relative z-10">
+            <div className="text-2xl font-bold text-foreground">{stats.pendingTasks}</div>
             <p className="text-xs text-muted-foreground">
               {stats.pendingTasksChange > 0 ? "+" : ""}
               {stats.pendingTasksChange} tasks since yesterday
@@ -358,10 +388,19 @@ function Dashboard() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <DepartmentStats onDepartmentSelect={handleDepartmentSelect} />
-        <TasksOverview />
-        <AIInsights />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+        <div className="electric-section group">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <DepartmentStats onDepartmentSelect={handleDepartmentSelect} />
+        </div>
+        <div className="electric-section group">
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-accent/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <TasksOverview />
+        </div>
+        <div className="electric-section group">
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <AIInsights />
+        </div>
       </div>
 
       <CreateTaskDialog open={isCreateTaskOpen} onOpenChange={setIsCreateTaskOpen} />

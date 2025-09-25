@@ -518,25 +518,34 @@ function Progress() {
   }
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
+    <div className="container mx-auto py-6 space-y-6 electric-dashboard">
+      {/* Electric Background Particles */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="electric-particles opacity-20"></div>
+        <div className="electric-particles-small opacity-15"></div>
+      </div>
+
       <ToastContainer />
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Task Progress</h1>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 electric-header p-6 rounded-2xl relative z-10">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-2xl"></div>
+        <div className="absolute inset-0 bg-cyber-grid opacity-10 rounded-2xl"></div>
+        
+        <div className="relative z-10">
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-text">Task Progress</h1>
           <p className="text-muted-foreground">
             Track and update your daily progress on assigned tasks
           </p>
         </div>
         
-        <div className="w-full md:w-64">
+        <div className="w-full md:w-64 relative z-10">
           <Select 
             value={selectedTask?._id} 
             onValueChange={handleTaskChange}
           >
-            <SelectTrigger>
+            <SelectTrigger className="electric-button-outline">
               <SelectValue placeholder="Select a task" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="electric-card">
               {tasks.map(task => (
                 <SelectItem key={task._id} value={task._id}>
                   {task.title}

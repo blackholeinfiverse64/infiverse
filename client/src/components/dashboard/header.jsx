@@ -85,8 +85,8 @@
 
 import { useState } from "react"
 import { Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "../ui/button"
+import { Input } from "../ui/input"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -94,12 +94,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "../ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { ModeToggle } from "../mode-toggle"
 import { NotificationsPopover } from "../notifications/notifications-popover"
 import { useAuth } from "../../context/auth-context"
-import { MobileMenuButton } from "@/components/ui/mobile-menu-button"
+import { MobileMenuButton } from "../ui/mobile-menu-button"
 import { EnhancedSearch } from "./enhanced-search"
 import { UserDetailsModal } from "./user-details-modal"
 import { Alerts } from "../notifications/Alerts";
