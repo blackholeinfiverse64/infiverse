@@ -1,0 +1,82 @@
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+export default function SplashScreen() {
+  const [isVisible, setIsVisible] = useState(true)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    // Mark splash as shown for this session
+    sessionStorage.setItem("splashShown", "true")
+    
+    // Hide splash screen after 10 seconds
+    const timer = setTimeout(() => {
+      setIsVisible(false)
+      // Always go to login/signup page after splash
+      setTimeout(() => {
+        navigate('/login', { replace: true })
+      }, 800) // Wait for fade out animation
+    }, 10000) // 10 seconds
+
+    return () => clearTimeout(timer)
+  }, [navigate])
+
+  const handleSkip = () => {
+    // Mark splash as shown and go directly to login
+    sessionStorage.setItem("splashShown", "true")
+    setIsVisible(false)
+    
+    setTimeout(() => {
+      navigate('/login', { replace: true })
+    }, 300)
+  }
+
+  return (
+    <div className={`splash-screen ${!isVisible ? 'fade-out' : ''}`} onClick={handleSkip}>
+      {/* Background elements */}
+      <div className="splash-background"></div>
+      <div className="splash-particles"></div>
+      
+      {/* Main content */}
+      <div className="splash-content">
+        {/* 3D Title */}
+        <div className="splash-title-container">
+          <h1 className="splash-title">
+            <span className="title-word blackhole">Blackhole</span>
+            <span className="title-word infiverse">Infiverse</span>
+          </h1>
+          <div className="title-glow"></div>
+        </div>
+
+        {/* Animated tagline */}
+        <p className="splash-tagline">
+          Where Innovation Meets Infinity
+        </p>
+
+        {/* Loading animation */}
+        <div className="splash-loader">
+          <div className="loader-ring"></div>
+          <div className="loader-ring"></div>
+          <div className="loader-ring"></div>
+        </div>
+
+        {/* Skip button */}
+        <button 
+          className="splash-skip-btn"
+          onClick={handleSkip}
+          aria-label="Skip splash screen"
+        >
+          Click anywhere to skip
+        </button>
+
+        {/* Particle system */}
+        <div className="splash-orbs">
+          <div className="orb orb-1"></div>
+          <div className="orb orb-2"></div>
+          <div className="orb orb-3"></div>
+          <div className="orb orb-4"></div>
+        </div>
+      </div>
+    </div>
+  )
+}

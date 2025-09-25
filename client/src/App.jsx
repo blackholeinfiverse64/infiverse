@@ -8,6 +8,7 @@ import { SocketProvider } from "./context/socket-context";
 import { AuthProvider } from "./context/auth-context";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { DashboardLayout } from "./layouts/DashboardLayout";
+import SplashScreen from "./components/SplashScreen";
 import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
 import Dependencies from "./pages/Dependencies";
@@ -43,6 +44,12 @@ import { usePushNotifications } from "./hooks/usePushNotifications";
 function App() {
   const user = JSON.parse(localStorage.getItem("WorkflowUser") || "{}");
   const isAdmin = user?.role === "Admin";
+  
+  // Splash screen state - always show splash for new sessions
+  const [showSplash, setShowSplash] = useState(() => {
+    // Show splash screen for all users on app load
+    return !sessionStorage.getItem("splashShown")
+  });
 
   const [recentReviews, setRecentReviews] = useState([]);
   const [hasNewReviews, setHasNewReviews] = useState(false);
@@ -134,6 +141,9 @@ function App() {
                   markReviewsAsSeen={markReviewsAsSeen}
                 >
                   <Routes>
+                    {/* Splash Screen Route */}
+                    <Route path="/home" element={<SplashScreen />} />
+                    
                     {/* Public Routes */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
@@ -142,7 +152,11 @@ function App() {
                     <Route
                       path="/"
                       element={
-                        isAdmin ? (
+                        showSplash ? (
+                          <Navigate to="/home" replace />
+                        ) : !user?.id ? (
+                          <Navigate to="/login" replace />
+                        ) : isAdmin ? (
                           <Navigate to="/dashboard" replace />
                         ) : (
                           <ProtectedRoute>
