@@ -403,8 +403,9 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cyber-grid relative">
-      <div className="floating-orbs"></div>
+    <div className="min-h-screen w-full flex items-center justify-center auth-gradient relative p-4">
+      {/* Enhanced background elements */}
+      <div className="auth-background-elements"></div>
 
       <Card className="cyber-card glass glow-accent w-full max-w-2xl z-10">
         <CardHeader className="text-center space-y-2">

@@ -45,9 +45,9 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cyber-grid relative">
-      {/* floating orbs */}
-      <div className="floating-orbs"></div>
+    <div className="min-h-screen w-full flex items-center justify-center auth-gradient relative p-4">
+      {/* Enhanced background elements */}
+      <div className="auth-background-elements"></div>
 
       <Card className="cyber-card glass glow-primary w-full max-w-md z-10">
         <CardHeader className="space-y-2 text-center">
