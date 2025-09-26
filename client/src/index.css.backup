@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @tailwind base;
 @tailwind components;
@@ -98,42 +99,31 @@
     box-shadow: var(--shadow-secondary-glow); 
   }
 
-  /* Enhanced Electric Sidebar Effects */
+  /* Electric Sidebar Effects */
   .electric-sidebar {
     background: linear-gradient(145deg, 
-      hsl(220 27% 6% / 0.98) 0%, 
-      hsl(220 20% 8% / 0.95) 30%,
-      hsl(220 15% 10% / 0.92) 50%,
-      hsl(220 20% 8% / 0.95) 70%, 
-      hsl(220 27% 6% / 0.98) 100%);
-    backdrop-filter: blur(25px) saturate(150%);
-    border-right: none;
+      hsl(220 27% 6% / 0.95) 0%, 
+      hsl(220 20% 8% / 0.9) 50%, 
+      hsl(220 27% 6% / 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border-right: 2px solid transparent;
     background-clip: padding-box;
     position: relative;
-    box-shadow: 
-      inset 1px 0 0 hsl(195 100% 50% / 0.1),
-      2px 0 20px hsl(220 27% 4% / 0.3),
-      4px 0 40px hsl(195 100% 50% / 0.05);
   }
 
   .electric-sidebar::before {
     content: '';
     position: absolute;
     inset: 0;
+    padding: 2px;
     background: linear-gradient(180deg, 
-      hsl(195 100% 50% / 0.08) 0%,
-      hsl(280 100% 50% / 0.05) 30%,
-      transparent 50%,
-      hsl(142 100% 50% / 0.05) 70%,
-      hsl(195 100% 50% / 0.08) 100%);
+      hsl(195 100% 50% / 0.5) 0%,
+      hsl(280 100% 50% / 0.3) 50%,
+      hsl(142 100% 50% / 0.5) 100%);
     border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
     pointer-events: none;
-    animation: electric-sidebar-glow 8s ease-in-out infinite;
-  }
-
-  @keyframes electric-sidebar-glow {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
   }
 
   .shadow-electric {
@@ -180,46 +170,34 @@
 
   .electric-active {
     background: linear-gradient(135deg, 
-      hsl(195 100% 50% / 0.25) 0%,
-      hsl(280 100% 50% / 0.20) 30%,
-      hsl(142 100% 50% / 0.25) 100%);
-    border: 1px solid hsl(195 100% 50% / 0.4);
-    box-shadow: 
-      0 2px 10px hsl(195 100% 50% / 0.2),
-      inset 0 1px 0 hsl(195 100% 50% / 0.3);
+      hsl(195 100% 50% / 0.2) 0%,
+      hsl(280 100% 50% / 0.15) 50%,
+      hsl(142 100% 50% / 0.2) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.3);
   }
 
   .electric-inactive {
     background: linear-gradient(135deg, 
-      hsl(220 20% 8% / 0.6) 0%,
-      hsl(220 15% 12% / 0.4) 50%,
-      hsl(220 20% 8% / 0.6) 100%);
-    border: 1px solid hsl(220 15% 20% / 0.3);
-    backdrop-filter: blur(10px);
+      hsl(220 20% 8% / 0.5) 0%,
+      hsl(220 15% 10% / 0.3) 100%);
+    border: 1px solid hsl(220 15% 20% / 0.5);
   }
 
   .electric-hover:hover {
     background: linear-gradient(135deg, 
-      hsl(195 100% 50% / 0.15) 0%,
-      hsl(280 100% 50% / 0.12) 30%,
-      hsl(142 100% 50% / 0.15) 100%);
-    border: 1px solid hsl(195 100% 50% / 0.3);
-    transform: translateX(6px) scale(1.02);
-    box-shadow: 
-      0 4px 15px hsl(195 100% 50% / 0.2),
-      inset 0 1px 0 hsl(195 100% 50% / 0.2);
+      hsl(195 100% 50% / 0.1) 0%,
+      hsl(280 100% 50% / 0.08) 50%,
+      hsl(142 100% 50% / 0.1) 100%);
+    border: 1px solid hsl(195 100% 50% / 0.2);
+    transform: translateX(4px);
   }
 
   .hover-electric:hover {
     background: linear-gradient(135deg, 
-      hsl(195 100% 50% / 0.12) 0%,
-      hsl(280 100% 50% / 0.10) 50%,
-      hsl(142 100% 50% / 0.12) 100%);
-    border-color: hsl(195 100% 50% / 0.4);
-    transform: translateX(4px) scale(1.01);
-    box-shadow: 
-      0 2px 8px hsl(195 100% 50% / 0.15),
-      inset 0 1px 0 hsl(195 100% 50% / 0.1);
+      hsl(195 100% 50% / 0.1) 0%,
+      hsl(280 100% 50% / 0.08) 100%);
+    border-color: hsl(195 100% 50% / 0.3);
+    transform: translateX(2px);
   }
 
   .electric-glow {
@@ -314,46 +292,6 @@
   .animate-gradient-text {
     background-size: 200% 200%;
     animation: gradient-text 3s ease infinite;
-  }
-
-  /* Enhanced Navigation Effects */
-  .shadow-glow {
-    box-shadow: 
-      0 0 8px currentColor,
-      0 0 16px currentColor;
-  }
-
-  .electric-line {
-    position: relative;
-  }
-
-  .electric-line::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, 
-      transparent, 
-      hsl(195 100% 50% / 0.6), 
-      transparent);
-    animation: electric-line-pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes electric-line-pulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-
-  /* Remove any unwanted borders and lines */
-  .no-border {
-    border: none !important;
-    outline: none !important;
-  }
-
-  .seamless-transition {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Electric Dashboard Effects */
@@ -1327,7 +1265,6 @@ body.sidebar-open {
 }
 
 /* Typography - Futuristic Font Stack */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -1337,6 +1274,10 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Cyberpunk Typography Classes */
@@ -1474,16 +1415,52 @@ body {
   height: 4.5rem; /* 72px */
 }
 
-/* Ensure proper scrolling behavior */
+/* Ensure proper full-screen coverage */
 html, body {
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Root container full coverage */
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* Main content area scrolling */
 .main-content-scroll {
-  height: calc(100vh - 4.5rem);
+  height: calc(100vh - 4rem);
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+/* Full coverage utilities */
+.full-coverage {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive layout utilities */
+.responsive-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove any default spacing */
+.no-spacing {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
 }
 
 /* Cyberpunk Accessibility & Performance */
