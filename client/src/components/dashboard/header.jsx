@@ -104,7 +104,7 @@ import { EnhancedSearch } from "./enhanced-search"
 import { UserDetailsModal } from "./user-details-modal"
 import { Alerts } from "../notifications/Alerts";
 
-export function DashboardHeader({ sidebarOpen, onSidebarToggle }) {
+export function DashboardHeader() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedUser, setSelectedUser] = useState(null)
   const [showUserModal, setShowUserModal] = useState(false)
@@ -117,11 +117,8 @@ export function DashboardHeader({ sidebarOpen, onSidebarToggle }) {
 
   return (
     <header className="w-full h-18 border-b border-border/30 bg-background/95 backdrop-blur-xl neo-card shadow-neo-light">
-      <div className="flex h-full items-center justify-between px-4 md:px-8 relative">
-        {/* Mobile Menu Button */}
-        <div className="block md:hidden z-50">
-          <MobileMenuButton isOpen={sidebarOpen} onClick={onSidebarToggle} className="mr-3 hover-cyber" />
-        </div>
+      <div className="flex h-full items-center justify-between px-4 md:px-8 relative ml-20">
+        {/* Content starts with margin to account for black hole button */}
 
         {/* Enhanced Search Bar */}
         <EnhancedSearch onUserSelect={handleUserSelect} />

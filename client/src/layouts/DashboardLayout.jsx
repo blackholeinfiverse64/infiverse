@@ -9,8 +9,6 @@ import { useAuth } from "../context/auth-context"
 import api from "../lib/api"
 
 export function DashboardLayout() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const { user } = useAuth()
   const [showStartDayDialog, setShowStartDayDialog] = useState(false)
   const [checkedPrompt, setCheckedPrompt] = useState(false)
@@ -53,23 +51,15 @@ export function DashboardLayout() {
     setShowStartDayDialog(false)
   }
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen)
-    // Add a class to the body to prevent scrolling when sidebar is open
-    if (!sidebarOpen) {
-      document.body.classList.add('sidebar-open')
-    } else {
-      document.body.classList.remove('sidebar-open')
-    }
-  }
 
-  const toggleSidebarCollapse = () => {
-    setSidebarCollapsed(!sidebarCollapsed)
-  }
 
   return (
-    <div className="min-h-screen bg-background flex overflow-hidden electric-layout">
-      {/* Enhanced Electric Background Elements */}
+    <div className="min-h-screen bg-background flex overflow-hidden electric-layout universe-background">
+      {/* Enhanced Universe Background Elements */}
+      <div className="fixed inset-0 universe-particles opacity-15 pointer-events-none"></div>
+      <div className="fixed inset-0 universe-particles-medium opacity-10 pointer-events-none"></div>
+      <div className="fixed inset-0 universe-particles-large opacity-5 pointer-events-none"></div>
+      
       <div className="fixed inset-0 bg-cyber-grid opacity-15 pointer-events-none"></div>
       <div className="fixed inset-0 gradient-cyber opacity-10 pointer-events-none"></div>
       
@@ -79,40 +69,21 @@ export function DashboardLayout() {
         <div className="electric-particles-small opacity-15"></div>
       </div>
 
-      {/* Enhanced Cyber Overlay for mobile */}
-      {sidebarOpen && (
-        <div
-          className="md:hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-lg transition-cyber animate-fade-in"
-          onClick={() => toggleSidebar()}
-        />
-      )}
 
-      {/* Fixed Sidebar for Desktop */}
-      <div className="hidden md:flex md:flex-shrink-0">
-        <div className={`flex flex-col transition-all duration-500 ease-in-out ${sidebarCollapsed ? 'w-20' : 'w-80'}`}>
-          <DashboardSidebar collapsed={sidebarCollapsed} onToggleCollapse={toggleSidebarCollapse} />
-        </div>
-      </div>
 
-      {/* Mobile Sidebar */}
-      <div
-        className={`fixed inset-y-0 left-0 z-50 w-80 transform transition-cyber md:hidden ${
-          sidebarOpen ? 'translate-x-0 glow-primary' : '-translate-x-full'
-        }`}
-      >
-        <DashboardSidebar collapsed={false} onToggleCollapse={() => {}} />
-      </div>
+      {/* New Sidebar - Always renders for both desktop and mobile */}
+      <DashboardSidebar />
 
       {/* Main Content Container */}
       <div className="flex flex-col flex-1 overflow-hidden">
         {/* Fixed Header */}
         <div className="flex-shrink-0 z-40">
-          <DashboardHeader sidebarOpen={sidebarOpen} onSidebarToggle={toggleSidebar} />
+          <DashboardHeader />
         </div>
 
         {/* Main Content Area */}
         <main className="flex-1 overflow-auto bg-background relative">
-          <div className="h-full p-4 md:p-6 lg:p-8 relative z-10">
+          <div className="h-full p-4 md:p-6 lg:p-8 relative z-10 ml-4">
             <div className="max-w-full mx-auto animate-fade-in">
               <Outlet />
               <EnhancedStartDayDialog

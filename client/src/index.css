@@ -178,6 +178,163 @@
     100% { transform: translateY(-100px); }
   }
 
+  /* Enhanced Glassmorphism Sidebar Styles */
+  .glassmorphism-sidebar {
+    background: linear-gradient(145deg, 
+      rgba(15, 23, 42, 0.08) 0%,
+      rgba(30, 41, 59, 0.04) 30%,
+      rgba(51, 65, 85, 0.06) 60%,
+      rgba(15, 23, 42, 0.08) 100%);
+    backdrop-filter: blur(25px) saturate(180%) brightness(120%);
+    border: 1px solid rgba(6, 182, 212, 0.15);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 4px 16px rgba(6, 182, 212, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(6, 182, 212, 0.1);
+    -webkit-backdrop-filter: blur(25px) saturate(180%) brightness(120%);
+  }
+
+  .glassmorphism-active {
+    background: linear-gradient(135deg, 
+      rgba(6, 182, 212, 0.2) 0%,
+      rgba(59, 130, 246, 0.15) 50%,
+      rgba(147, 51, 234, 0.2) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 
+      0 4px 20px rgba(6, 182, 212, 0.2),
+      inset 0 1px 0 rgba(6, 182, 212, 0.3);
+  }
+
+  .glassmorphism-inactive {
+    background: linear-gradient(135deg, 
+      rgba(71, 85, 105, 0.15) 0%,
+      rgba(51, 65, 85, 0.1) 50%,
+      rgba(71, 85, 105, 0.15) 100%);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  .glassmorphism-hover {
+    background: linear-gradient(135deg, 
+      rgba(6, 182, 212, 0.15) 0%,
+      rgba(59, 130, 246, 0.1) 50%,
+      rgba(147, 51, 234, 0.15) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    box-shadow: 
+      0 2px 10px rgba(6, 182, 212, 0.1),
+      inset 0 1px 0 rgba(6, 182, 212, 0.2);
+  }
+
+  .glassmorphism-profile {
+    background: linear-gradient(135deg, 
+      rgba(6, 182, 212, 0.1) 0%,
+      rgba(59, 130, 246, 0.05) 50%,
+      rgba(147, 51, 234, 0.1) 100%);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(6, 182, 212, 0.15);
+  }
+
+  /* Electric Ring Animations for Black Hole Button */
+  @keyframes electric-ring {
+    0% { 
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: rotate(180deg) scale(1.05);
+      opacity: 0.8;
+    }
+    100% { 
+      transform: rotate(360deg) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes electric-ring-reverse {
+    0% { 
+      transform: rotate(360deg) scale(1);
+      opacity: 0.8;
+    }
+    50% { 
+      transform: rotate(180deg) scale(0.95);
+      opacity: 1;
+    }
+    100% { 
+      transform: rotate(0deg) scale(1);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes electric-flash {
+    0%, 90%, 100% { 
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    5%, 85% { 
+      opacity: 1;
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes electric-pulse {
+    0%, 100% { 
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-electric-ring {
+    animation: electric-ring 3s linear infinite;
+  }
+
+  .animate-electric-ring-reverse {
+    animation: electric-ring-reverse 2s linear infinite;
+  }
+
+  .animate-electric-flash {
+    animation: electric-flash 4s ease-in-out infinite;
+  }
+
+  .animate-electric-pulse {
+    animation: electric-pulse 2s ease-in-out infinite;
+  }
+
+  /* Blue Electric Particles */
+  .electric-particles-blue {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, rgba(6, 182, 212, 0.8), transparent),
+      radial-gradient(2px 2px at 40px 70px, rgba(59, 130, 246, 0.8), transparent),
+      radial-gradient(1px 1px at 90px 40px, rgba(147, 51, 234, 0.6), transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(6, 182, 212, 0.7), transparent),
+      radial-gradient(2px 2px at 160px 30px, rgba(59, 130, 246, 0.6), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: electric-drift 25s linear infinite;
+  }
+
+  .electric-particles-cyan {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(1px 1px at 25px 25px, rgba(34, 211, 238, 0.6), transparent),
+      radial-gradient(1px 1px at 75px 75px, rgba(96, 165, 250, 0.5), transparent),
+      radial-gradient(1px 1px at 125px 25px, rgba(168, 85, 247, 0.4), transparent);
+    background-repeat: repeat;
+    background-size: 150px 150px;
+    animation: electric-drift 20s linear infinite reverse;
+  }
+
   .electric-active {
     background: linear-gradient(135deg, 
       hsl(195 100% 50% / 0.25) 0%,
@@ -196,6 +353,46 @@
       hsl(220 20% 8% / 0.6) 100%);
     border: 1px solid hsl(220 15% 20% / 0.3);
     backdrop-filter: blur(10px);
+  }
+
+  /* Enhanced Scrollbar Styles for Glassmorphism Sidebar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: rgba(6, 182, 212, 0.05);
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, 
+      rgba(6, 182, 212, 0.4) 0%, 
+      rgba(59, 130, 246, 0.4) 50%, 
+      rgba(147, 51, 234, 0.4) 100%);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, 
+      rgba(6, 182, 212, 0.7) 0%, 
+      rgba(59, 130, 246, 0.7) 50%, 
+      rgba(147, 51, 234, 0.7) 100%);
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+  }
+
+  /* Ensure proper scrollbar visibility */
+  .scrollbar-thumb-cyan-400\/40 {
+    scrollbar-color: rgba(6, 182, 212, 0.4) rgba(6, 182, 212, 0.05);
+  }
+
+  .scrollbar-track-transparent {
+    scrollbar-color: rgba(6, 182, 212, 0.4) transparent;
   }
 
   .electric-hover:hover {
@@ -344,6 +541,93 @@
   @keyframes electric-line-pulse {
     0%, 100% { opacity: 0.3; }
     50% { opacity: 1; }
+  }
+
+  /* Unified Sidebar Enhancements */
+  .unified-nav-item {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .unified-nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.05) 0%,
+      hsl(var(--secondary) / 0.03) 50%,
+      hsl(var(--accent) / 0.05) 100%);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .unified-nav-item:hover::before {
+    opacity: 1;
+  }
+
+  .unified-divider {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .unified-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%,
+      hsl(var(--primary) / 0.3) 25%,
+      hsl(var(--primary) / 0.5) 50%,
+      hsl(var(--primary) / 0.3) 75%,
+      transparent 100%);
+    animation: unified-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes unified-pulse {
+    0%, 100% { 
+      opacity: 0.3;
+      transform: translateY(-50%) scaleX(0.8);
+    }
+    50% { 
+      opacity: 1;
+      transform: translateY(-50%) scaleX(1.2);
+    }
+  }
+
+  .unified-status-dot {
+    animation: unified-status-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes unified-status-pulse {
+    0%, 100% { 
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  .unified-profile-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .unified-profile-hover:hover {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.2) 0%,
+      hsl(var(--secondary) / 0.15) 50%,
+      hsl(var(--accent) / 0.2) 100%);
+    box-shadow: 
+      0 4px 20px hsl(var(--primary) / 0.15),
+      inset 0 1px 0 hsl(var(--primary) / 0.2);
   }
 
   /* Remove any unwanted borders and lines */
@@ -2097,11 +2381,11 @@ body.cyber-theme {
   height: 100%;
   background-image:
     radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.8) 1px, transparent 0),
-    radial-gradient(circle at 1px 1px, rgba(0, 150, 255, 0.6) 1px, transparent 0),
-    radial-gradient(circle at 1px 1px, rgba(100, 200, 255, 0.4) 1px, transparent 0);
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.6) 2px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.4) 1px, transparent 0);
   background-size: 150px 150px, 200px 200px, 300px 300px;
   background-position: 0 0, 50px 50px, 100px 100px;
-  animation: universe-drift 30s linear infinite;
+  animation: universe-rotate-135 30s linear infinite;
   opacity: 0.7;
 }
 
@@ -2114,10 +2398,10 @@ body.cyber-theme {
   height: 100%;
   background-image:
     radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.9) 1px, transparent 0),
-    radial-gradient(circle at 1px 1px, rgba(0, 100, 255, 0.7) 1px, transparent 0);
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.7) 1px, transparent 0);
   background-size: 80px 80px, 120px 120px;
   background-position: 25px 25px, 75px 75px;
-  animation: universe-drift 25s linear infinite reverse;
+  animation: universe-rotate-135 25s linear infinite reverse;
   opacity: 0.8;
 }
 
@@ -2132,11 +2416,11 @@ body.cyber-theme {
     radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 1) 2px, transparent 0);
   background-size: 400px 400px;
   background-position: 200px 200px;
-  animation: twinkle-stars 3s ease-in-out infinite;
-  opacity: 0.3;
+  animation: universe-rotate-135-enhanced 35s linear infinite;
+  opacity: 0.5;
 }
 
-/* Medium revolving particles */
+/* Medium revolving particles (white only) */
 .splash-particles-medium {
   position: absolute;
   top: 0;
@@ -2145,11 +2429,11 @@ body.cyber-theme {
   height: 100%;
   background-image:
     radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.9) 3px, transparent 0),
-    radial-gradient(circle at 4px 4px, rgba(0, 150, 255, 0.8) 4px, transparent 0),
-    radial-gradient(circle at 3px 3px, rgba(100, 200, 255, 0.7) 3px, transparent 0);
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.7) 2px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.5) 1px, transparent 0);
   background-size: 250px 250px, 300px 300px, 200px 200px;
   background-position: 0 0, 75px 75px, 150px 150px;
-  animation: revolve-particles 40s linear infinite;
+  animation: universe-rotate-135 40s linear infinite;
   opacity: 0.6;
 }
 
@@ -2161,11 +2445,11 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.8) 3px, transparent 0),
-    radial-gradient(circle at 4px 4px, rgba(0, 200, 255, 0.6) 4px, transparent 0);
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.8) 2px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.6) 1px, transparent 0);
   background-size: 180px 180px, 220px 220px;
   background-position: 50px 50px, 125px 125px;
-  animation: revolve-particles 35s linear infinite reverse;
+  animation: universe-rotate-135-enhanced 35s linear infinite reverse;
   opacity: 0.7;
 }
 
@@ -2177,11 +2461,11 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 5px 5px, rgba(255, 255, 255, 1) 5px, transparent 0),
-    radial-gradient(circle at 4px 4px, rgba(0, 100, 255, 0.9) 4px, transparent 0);
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.6) 2px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.4) 1px, transparent 0);
   background-size: 350px 350px, 280px 280px;
   background-position: 100px 100px, 175px 175px;
-  animation: orbital-drift 45s linear infinite;
+  animation: universe-rotate-135 45s linear infinite;
   opacity: 0.5;
 }
 
@@ -2341,12 +2625,53 @@ body.cyber-theme {
   }
 }
 
-@keyframes universe-drift {
+/* 135-degree rotation animation keyframes */
+@keyframes universe-rotate-135 {
   0% {
-    transform: translate(0, 0);
+    transform: rotate(0deg) translate(0, 0);
+  }
+  25% {
+    transform: rotate(90deg) translate(20px, -20px);
+  }
+  50% {
+    transform: rotate(180deg) translate(0, -40px);
+  }
+  75% {
+    transform: rotate(270deg) translate(-20px, -20px);
   }
   100% {
-    transform: translate(-150px, -150px);
+    transform: rotate(360deg) translate(0, 0);
+  }
+}
+
+/* Enhanced universe rotation with 135-degree emphasis */
+@keyframes universe-rotate-135-enhanced {
+  0% {
+    transform: rotate(0deg) translate(0, 0) scale(1);
+  }
+  12.5% {
+    transform: rotate(45deg) translate(15px, -15px) scale(1.05);
+  }
+  25% {
+    transform: rotate(90deg) translate(20px, -20px) scale(1.1);
+  }
+  37.5% {
+    transform: rotate(135deg) translate(15px, -25px) scale(1.15);
+  }
+  50% {
+    transform: rotate(180deg) translate(0, -30px) scale(1.1);
+  }
+  62.5% {
+    transform: rotate(225deg) translate(-15px, -25px) scale(1.05);
+  }
+  75% {
+    transform: rotate(270deg) translate(-20px, -20px) scale(1);
+  }
+  87.5% {
+    transform: rotate(315deg) translate(-15px, -15px) scale(0.95);
+  }
+  100% {
+    transform: rotate(360deg) translate(0, 0) scale(1);
   }
 }
 
@@ -2361,42 +2686,6 @@ body.cyber-theme {
   }
 }
 
-@keyframes revolve-particles {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(30px, -30px) rotate(90deg);
-  }
-  50% {
-    transform: translate(0, -60px) rotate(180deg);
-  }
-  75% {
-    transform: translate(-30px, -30px) rotate(270deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(360deg);
-  }
-}
-
-@keyframes orbital-drift {
-  0% {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  25% {
-    transform: translate(50px, -25px) rotate(90deg) scale(1.1);
-  }
-  50% {
-    transform: translate(25px, -75px) rotate(180deg) scale(0.9);
-  }
-  75% {
-    transform: translate(-25px, -50px) rotate(270deg) scale(1.05);
-  }
-  100% {
-    transform: translate(0, 0) rotate(360deg) scale(1);
-  }
-}
-
 /* Large floating particles */
 .splash-particles-large {
   position: absolute;
@@ -2405,12 +2694,12 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 6px 6px, rgba(255, 255, 255, 0.7) 6px, transparent 0),
-    radial-gradient(circle at 8px 8px, rgba(0, 150, 255, 0.6) 8px, transparent 0),
-    radial-gradient(circle at 7px 7px, rgba(100, 200, 255, 0.5) 7px, transparent 0);
+    radial-gradient(circle at 4px 4px, rgba(255, 255, 255, 0.7) 4px, transparent 0),
+    radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.5) 3px, transparent 0),
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.3) 2px, transparent 0);
   background-size: 500px 500px, 600px 600px, 400px 400px;
   background-position: 0 0, 200px 200px, 300px 100px;
-  animation: large-orbit 60s linear infinite;
+  animation: universe-rotate-135-enhanced 60s linear infinite;
   opacity: 0.4;
 }
 
@@ -2422,11 +2711,11 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 7px 7px, rgba(255, 255, 255, 0.6) 7px, transparent 0),
-    radial-gradient(circle at 9px 9px, rgba(0, 180, 255, 0.5) 9px, transparent 0);
+    radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.6) 3px, transparent 0),
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.4) 2px, transparent 0);
   background-size: 450px 450px, 550px 550px;
   background-position: 150px 150px, 350px 50px;
-  animation: large-orbit 50s linear infinite reverse;
+  animation: universe-rotate-135 50s linear infinite reverse;
   opacity: 0.5;
 }
 
@@ -2570,13 +2859,13 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.8) 1px, transparent 0),
-    radial-gradient(circle at 1px 1px, rgba(0, 150, 255, 0.6) 1px, transparent 0),
-    radial-gradient(circle at 1px 1px, rgba(100, 200, 255, 0.4) 1px, transparent 0);
-  background-size: 150px 150px, 200px 200px, 300px 300px;
-  background-position: 0 0, 50px 50px, 100px 100px;
-  animation: universe-drift 30s linear infinite;
-  opacity: 0.7;
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.9) 1px, transparent 0),
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.7) 2px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.5) 1px, transparent 0);
+  background-size: 120px 120px, 180px 180px, 250px 250px;
+  background-position: 0 0, 60px 60px, 120px 120px;
+  animation: universe-rotate-135 25s linear infinite;
+  opacity: 0.8;
   pointer-events: none;
 }
 
@@ -2588,12 +2877,12 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.9) 1px, transparent 0),
-    radial-gradient(circle at 1px 1px, rgba(0, 100, 255, 0.7) 1px, transparent 0);
-  background-size: 80px 80px, 120px 120px;
-  background-position: 25px 25px, 75px 75px;
-  animation: universe-drift 25s linear infinite reverse;
-  opacity: 0.8;
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.8) 1px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.6) 1px, transparent 0);
+  background-size: 80px 80px, 150px 150px;
+  background-position: 40px 40px, 100px 100px;
+  animation: universe-rotate-135 20s linear infinite reverse;
+  opacity: 0.7;
 }
 
 .universe-particles::after {
@@ -2604,11 +2893,11 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 1) 2px, transparent 0);
-  background-size: 400px 400px;
-  background-position: 200px 200px;
-  animation: twinkle-stars 3s ease-in-out infinite;
-  opacity: 0.3;
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.9) 2px, transparent 0);
+  background-size: 300px 300px;
+  background-position: 150px 150px;
+  animation: universe-rotate-135 30s linear infinite;
+  opacity: 0.5;
 }
 
 .universe-particles-medium {
@@ -2618,12 +2907,12 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.9) 3px, transparent 0),
-    radial-gradient(circle at 4px 4px, rgba(0, 150, 255, 0.8) 4px, transparent 0),
-    radial-gradient(circle at 3px 3px, rgba(100, 200, 255, 0.7) 3px, transparent 0);
-  background-size: 250px 250px, 300px 300px, 200px 200px;
-  background-position: 0 0, 75px 75px, 150px 150px;
-  animation: revolve-particles 40s linear infinite;
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.8) 2px, transparent 0),
+    radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.6) 3px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.4) 1px, transparent 0);
+  background-size: 200px 200px, 280px 280px, 160px 160px;
+  background-position: 50px 50px, 140px 140px, 100px 100px;
+  animation: universe-rotate-135-enhanced 35s linear infinite;
   opacity: 0.6;
   pointer-events: none;
 }
@@ -2636,12 +2925,12 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.8) 3px, transparent 0),
-    radial-gradient(circle at 4px 4px, rgba(0, 200, 255, 0.6) 4px, transparent 0);
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.7) 2px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.5) 1px, transparent 0);
   background-size: 180px 180px, 220px 220px;
-  background-position: 50px 50px, 125px 125px;
-  animation: revolve-particles 35s linear infinite reverse;
-  opacity: 0.7;
+  background-position: 90px 90px, 110px 110px;
+  animation: universe-rotate-135 25s linear infinite reverse;
+  opacity: 0.5;
 }
 
 .universe-particles-medium::after {
@@ -2652,12 +2941,12 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 5px 5px, rgba(255, 255, 255, 1) 5px, transparent 0),
-    radial-gradient(circle at 4px 4px, rgba(0, 100, 255, 0.9) 4px, transparent 0);
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.6) 2px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.4) 1px, transparent 0);
   background-size: 350px 350px, 280px 280px;
   background-position: 100px 100px, 175px 175px;
-  animation: orbital-drift 45s linear infinite;
-  opacity: 0.5;
+  animation: universe-rotate-135-enhanced 45s linear infinite;
+  opacity: 0.3;
 }
 
 .universe-particles-large {
@@ -2667,12 +2956,12 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 6px 6px, rgba(255, 255, 255, 0.7) 6px, transparent 0),
-    radial-gradient(circle at 8px 8px, rgba(0, 150, 255, 0.6) 8px, transparent 0),
-    radial-gradient(circle at 7px 7px, rgba(100, 200, 255, 0.5) 7px, transparent 0);
-  background-size: 500px 500px, 600px 600px, 400px 400px;
-  background-position: 0 0, 200px 200px, 300px 100px;
-  animation: large-orbit 60s linear infinite;
+    radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.7) 3px, transparent 0),
+    radial-gradient(circle at 4px 4px, rgba(255, 255, 255, 0.5) 4px, transparent 0),
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.3) 2px, transparent 0);
+  background-size: 400px 400px, 500px 500px, 350px 350px;
+  background-position: 200px 200px, 250px 250px, 175px 175px;
+  animation: universe-rotate-135 45s linear infinite;
   opacity: 0.4;
   pointer-events: none;
 }
@@ -2685,12 +2974,12 @@ body.cyber-theme {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 7px 7px, rgba(255, 255, 255, 0.6) 7px, transparent 0),
-    radial-gradient(circle at 9px 9px, rgba(0, 180, 255, 0.5) 9px, transparent 0);
-  background-size: 450px 450px, 550px 550px;
-  background-position: 150px 150px, 350px 50px;
-  animation: large-orbit 50s linear infinite reverse;
-  opacity: 0.5;
+    radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.6) 3px, transparent 0),
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.4) 2px, transparent 0);
+  background-size: 320px 320px, 380px 380px;
+  background-position: 160px 160px, 190px 190px;
+  animation: universe-rotate-135-enhanced 40s linear infinite reverse;
+  opacity: 0.3;
 }
 
 /* Responsive Design for Splash Screen */

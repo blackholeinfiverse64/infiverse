@@ -32,8 +32,13 @@ export default function SplashScreen() {
   }
 
   return (
-    <div className={`splash-screen ${!isVisible ? 'fade-out' : ''}`} onClick={handleSkip}>
-      {/* Background elements */}
+    <div className={`splash-screen universe-background ${!isVisible ? 'fade-out' : ''}`} onClick={handleSkip}>
+      {/* Enhanced Universe Background */}
+      <div className="universe-particles"></div>
+      <div className="universe-particles-medium"></div>
+      <div className="universe-particles-large"></div>
+      
+      {/* Legacy splash particles for additional effect */}
       <div className="splash-background"></div>
       <div className="splash-particles"></div>
       <div className="splash-particles-medium"></div>

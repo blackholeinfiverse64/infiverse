@@ -1,10 +1,12 @@
 import { useLocation, Link } from "react-router-dom";
-import { LayoutDashboard, CheckSquare, Network, Users, Sparkles, Settings, LogOut, CheckCircle, BarChart, Airplay, LayoutDashboardIcon, Target, Monitor, DollarSign, Calendar, Clock, UserCog, UserCheck } from "lucide-react";
+import { LayoutDashboard, CheckSquare, Network, Users, Sparkles, Settings, CheckCircle, BarChart, Airplay, LayoutDashboardIcon, Target, Monitor, DollarSign, Calendar, Clock, UserCog, UserCheck } from "lucide-react";
 import { useAuth } from "../../context/auth-context";
+import { useState } from "react";
 
 export function DashboardSidebar({ collapsed = false, onToggleCollapse }) {
+  const [isHidden, setIsHidden] = useState(false);
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   const baseRoutes = [
     { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -46,235 +48,154 @@ export function DashboardSidebar({ collapsed = false, onToggleCollapse }) {
     renderRoutes = baseRoutes; // For other roles like Manager, etc.
   }
 
+  const toggleSidebar = () => {
+    setIsHidden(!isHidden);
+  };
+
   return (
-    <div className="h-screen flex flex-col electric-sidebar shadow-electric overflow-hidden relative border-r-0">
-      {/* Enhanced Electric Background Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background/98 via-background/95 to-background/98 backdrop-blur-2xl"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/8 via-secondary/6 to-accent/8 opacity-70"></div>
-      <div className="absolute inset-0 bg-cyber-grid opacity-15"></div>
-      
-      {/* Enhanced Electric particles animation */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="electric-particles opacity-80"></div>
-        <div className="electric-particles-small opacity-60"></div>
+    <>
+      {/* Black Hole Toggle Button - Always Visible */}
+      <div className="fixed top-6 left-6 z-50">
+        <button
+          onClick={toggleSidebar}
+          className="relative w-16 h-16 rounded-full overflow-hidden group transition-all duration-700 hover:scale-110"
+        >
+          {/* Black Hole Image */}
+          <img 
+            src="/blackhole.png" 
+            alt="Toggle Sidebar"
+            className="w-full h-full object-cover rounded-full"
+          />
+          
+          {/* Electrical Blue Sparkle Overlay */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/30 via-blue-500/40 to-purple-600/30 animate-electric-pulse"></div>
+          
+          {/* Electric Ring Effect */}
+          <div className="absolute inset-0 rounded-full border-2 border-cyan-400/60 animate-electric-ring"></div>
+          <div className="absolute inset-1 rounded-full border border-blue-400/40 animate-electric-ring-reverse"></div>
+          
+          {/* Flash Effect */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent animate-electric-flash"></div>
+          
+          {/* Hover Glow */}
+          <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-cyan-400/20 via-blue-500/30 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"></div>
+        </button>
       </div>
 
-      {/* Enhanced Cyber Header */}
-      <div className="bg-gradient-to-r from-primary/8 to-secondary/8 relative overflow-hidden flex-shrink-0 border-b border-primary/10">
-        <div className="absolute inset-0 bg-cyber-grid opacity-25"></div>
-        <div className={`flex items-center relative z-10 transition-all duration-700 ${collapsed ? 'px-3 py-5 justify-center' : 'px-5 py-5'}`}>
-          <div className={`flex items-center font-bold text-2xl transition-all duration-700 ${collapsed ? 'gap-0' : 'gap-4'}`}>
-            <div className="relative">
-              <button
-                onClick={onToggleCollapse}
-                className="w-12 h-12 gradient-primary rounded-2xl flex items-center justify-center glow-primary animate-glow-pulse transform hover:scale-110 transition-all duration-500 cursor-pointer hover:rotate-12 group shadow-lg"
-              >
-                <Sparkles className="h-6 w-6 text-primary-foreground group-hover:animate-spin transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl animate-pulse opacity-60"></div>
-              </button>
-            </div>
-            {!collapsed && (
-              <span className="text-foreground font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-text tracking-wide">
+      {/* Glassmorphism Sidebar */}
+      <div className={`fixed top-0 left-0 h-screen w-80 z-40 transition-all duration-700 ease-in-out ${
+        isHidden ? 'transform -translate-x-full opacity-0' : 'transform translate-x-0 opacity-100'
+      }`}>
+        <div className="h-full glassmorphism-sidebar backdrop-blur-xl bg-gradient-to-br from-slate-900/20 via-slate-800/10 to-slate-900/20 border-r border-cyan-400/20 shadow-2xl relative flex flex-col">
+          {/* Enhanced Electric Background Effects */}
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-600/3 to-purple-600/5"></div>
+          <div className="absolute inset-0 bg-cyber-grid opacity-10"></div>
+          
+          {/* Electric particles animation */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="electric-particles-blue opacity-60"></div>
+            <div className="electric-particles-cyan opacity-40"></div>
+          </div>
+
+          {/* Header Section */}
+          <div className="relative z-10 p-6 border-b border-cyan-400/10 flex-shrink-0">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg animate-glow-pulse">
+                <Sparkles className="h-6 w-6 animate-pulse" />
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
                 Infiverse
               </span>
-            )}
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* Enhanced Navigation Container */}
-      <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-transparent relative z-10">
-        <div className={`transition-all duration-700 ${collapsed ? 'p-2' : 'p-4'}`}>
-          {/* Enhanced Main Navigation */}
-          <nav className={`transition-all duration-700 ${collapsed ? 'space-y-1.5' : 'space-y-3'}`}>
-            {renderRoutes.map((route) => {
-              const isActive = location.pathname === route.href;
-              return (
-                <Link
-                  key={route.href}
-                  to={route.href}
-                  className={`group flex items-center transition-all duration-500 relative overflow-hidden hover-electric ${
-                    collapsed 
-                      ? 'justify-center p-3.5 rounded-2xl mx-1' 
-                      : 'gap-5 px-5 py-4 rounded-2xl'
-                  } ${
-                    isActive
-                      ? "electric-active text-primary-foreground glow-primary shadow-electric transform scale-[1.02]"
-                      : "electric-inactive hover:electric-hover hover:text-primary text-foreground/90 hover:transform hover:scale-[1.01]"
-                  }`}
-                  title={collapsed ? route.title : undefined}
-                >
-                  {/* Enhanced Electric Active indicator */}
-                  {isActive && (
-                    <>
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary/25 via-secondary/25 to-accent/25 rounded-2xl animate-electric-pulse shadow-inner"></div>
-                      <div className="absolute inset-0 bg-cyber-grid opacity-35 rounded-2xl"></div>
-                      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-primary to-secondary rounded-r-full shadow-glow"></div>
-                    </>
-                  )}
-
-                  {/* Enhanced Icon with better styling */}
-                  <div className={`relative z-10 transition-all duration-500 ${
-                    collapsed ? 'p-2.5' : 'p-2'
-                  } rounded-xl ${
-                    isActive
-                      ? 'bg-gradient-to-br from-primary/30 to-secondary/20 text-primary-foreground electric-glow shadow-lg'
-                      : 'bg-gradient-to-br from-primary/10 to-secondary/5 text-primary/80 group-hover:bg-gradient-to-br group-hover:from-primary/20 group-hover:to-secondary/15 group-hover:text-primary group-hover:electric-glow group-hover:shadow-md'
-                  }`}>
-                    <route.icon className={`transition-all duration-500 ${collapsed ? 'h-6 w-6' : 'h-5 w-5'} ${isActive ? 'animate-pulse' : 'group-hover:scale-110 group-hover:rotate-3'}`} />
-                  </div>
-
-                  {/* Enhanced Text with cyber styling */}
-                  {!collapsed && (
-                    <div className="relative z-10 flex-1">
-                      <span className="transition-all duration-500 text-sm font-semibold tracking-wide">
-                        {route.title}
-                      </span>
+          {/* Navigation Container */}
+          <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-cyan-400/40 scrollbar-track-transparent relative z-10 min-h-0 max-h-full">
+            <div className="p-6 pb-12">
+              {/* Main Navigation */}
+              <nav className="space-y-3">
+                {renderRoutes.map((route) => {
+                  const isActive = location.pathname === route.href;
+                  return (
+                    <Link
+                      key={route.href}
+                      to={route.href}
+                      className={`group flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-500 relative overflow-hidden ${
+                        isActive
+                          ? "glassmorphism-active text-white shadow-lg shadow-cyan-500/20 border border-cyan-400/30"
+                          : "glassmorphism-inactive hover:glassmorphism-hover text-slate-300 hover:text-white hover:transform hover:scale-[1.02]"
+                      }`}
+                    >
+                      {/* Active indicator */}
                       {isActive && (
-                        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent animate-electric-pulse"></div>
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-blue-500/15 to-purple-600/20 rounded-2xl"></div>
+                          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-r-full shadow-lg shadow-cyan-400/50"></div>
+                        </>
                       )}
-                    </div>
-                  )}
 
-                  {/* Enhanced Electric glow effect */}
-                  {isActive && (
-                    <>
-                      <div className={`absolute ${collapsed ? 'right-1.5 top-1.5' : 'right-4 top-1/2 transform -translate-y-1/2'} w-2.5 h-2.5 bg-gradient-to-r from-accent to-secondary rounded-full animate-electric-pulse shadow-accent-glow`}></div>
-                      {!collapsed && (
-                        <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary to-transparent opacity-60"></div>
+                      {/* Icon */}
+                      <div className={`relative z-10 p-2 rounded-xl transition-all duration-500 ${
+                        isActive
+                          ? 'bg-gradient-to-br from-cyan-500/30 to-blue-500/20 text-white shadow-lg'
+                          : 'bg-gradient-to-br from-slate-700/30 to-slate-600/20 text-slate-400 group-hover:bg-gradient-to-br group-hover:from-cyan-500/20 group-hover:to-blue-500/15 group-hover:text-cyan-400'
+                      }`}>
+                        <route.icon className={`h-5 w-5 transition-all duration-500 ${isActive ? 'animate-pulse' : 'group-hover:scale-110 group-hover:rotate-3'}`} />
+                      </div>
+
+                      {/* Text */}
+                      <div className="relative z-10 flex-1">
+                        <span className="text-sm font-semibold tracking-wide">
+                          {route.title}
+                        </span>
+                      </div>
+
+                      {/* Electric glow effect for active */}
+                      {isActive && (
+                        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 w-2.5 h-2.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-pulse shadow-lg shadow-cyan-400/50"></div>
                       )}
+                    </Link>
+                  );
+                })}
+
+                {/* Settings Button */}
+                <Link
+                  to="/settings"
+                  className={`group flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-500 relative overflow-hidden ${
+                    location.pathname === '/settings' 
+                      ? "glassmorphism-active text-white shadow-lg shadow-cyan-500/20 border border-cyan-400/30"
+                      : "glassmorphism-inactive hover:glassmorphism-hover text-slate-300 hover:text-white hover:transform hover:scale-[1.02]"
+                  }`}
+                >
+                  {location.pathname === '/settings' && (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-blue-500/15 to-purple-600/20 rounded-2xl"></div>
+                      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-r-full shadow-lg shadow-cyan-400/50"></div>
                     </>
+                  )}
+                  <div className={`relative z-10 p-2 rounded-xl transition-all duration-500 ${
+                    location.pathname === '/settings'
+                      ? 'bg-gradient-to-br from-cyan-500/30 to-blue-500/20 text-white shadow-lg'
+                      : 'bg-gradient-to-br from-slate-700/30 to-slate-600/20 text-slate-400 group-hover:bg-gradient-to-br group-hover:from-cyan-500/20 group-hover:to-blue-500/15 group-hover:text-cyan-400'
+                  }`}>
+                    <Settings className={`h-5 w-5 transition-all duration-500 group-hover:rotate-90 ${location.pathname === '/settings' ? 'animate-pulse' : 'group-hover:scale-110'}`} />
+                  </div>
+                  <div className="relative z-10 flex-1">
+                    <span className="text-sm font-semibold tracking-wide">
+                      Settings
+                    </span>
+                  </div>
+                  {location.pathname === '/settings' && (
+                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 w-2.5 h-2.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-pulse shadow-lg shadow-cyan-400/50"></div>
                   )}
                 </Link>
-              );
-            })}
-
-            {/* Enhanced Workspace Button */}
-            <div className={`group flex items-center transition-all duration-500 relative overflow-hidden hover-electric ${
-              collapsed 
-                ? 'justify-center p-3.5 rounded-2xl mx-1' 
-                : 'gap-5 px-5 py-4 rounded-2xl'
-            } electric-inactive hover:electric-hover hover:text-primary text-foreground/90 cursor-pointer hover:transform hover:scale-[1.01] border border-primary/5 hover:border-primary/20`}
-            title={collapsed ? "Workspace" : undefined}>
-              <div className={`relative z-10 transition-all duration-500 ${
-                collapsed ? 'p-2.5' : 'p-2'
-              } rounded-xl bg-gradient-to-br from-primary/10 to-secondary/5 text-primary/80 group-hover:bg-gradient-to-br group-hover:from-primary/20 group-hover:to-secondary/15 group-hover:text-primary group-hover:electric-glow group-hover:shadow-md`}>
-                <svg className={`transition-all duration-500 ${collapsed ? 'h-6 w-6' : 'h-5 w-5'} group-hover:scale-110 group-hover:rotate-3`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-              {!collapsed && (
-                <div className="relative z-10 flex-1">
-                  <span className="text-sm font-semibold tracking-wide">Default Workspace</span>
-                  <div className="text-xs text-accent/80 font-medium">Active</div>
-                </div>
-              )}
+              </nav>
             </div>
+          </div>
 
-            {/* Enhanced Settings Button */}
-            <Link
-              to="/settings"
-              className={`group flex items-center transition-all duration-500 relative overflow-hidden hover-electric ${
-                collapsed 
-                  ? 'justify-center p-3.5 rounded-2xl mx-1' 
-                  : 'gap-5 px-5 py-4 rounded-2xl'
-              } ${
-                location.pathname === '/settings' 
-                  ? "electric-active text-primary-foreground glow-primary shadow-electric transform scale-[1.02]"
-                  : "electric-inactive hover:electric-hover hover:text-primary text-foreground/90 hover:transform hover:scale-[1.01]"
-              }`}
-              title={collapsed ? "Settings" : undefined}
-            >
-              {location.pathname === '/settings' && (
-                <>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/25 via-secondary/25 to-accent/25 rounded-2xl animate-electric-pulse shadow-inner"></div>
-                  <div className="absolute inset-0 bg-cyber-grid opacity-35 rounded-2xl"></div>
-                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-primary to-secondary rounded-r-full shadow-glow"></div>
-                </>
-              )}
-              <div className={`relative z-10 transition-all duration-500 ${
-                collapsed ? 'p-2.5' : 'p-2'
-              } rounded-xl ${
-                location.pathname === '/settings'
-                  ? 'bg-gradient-to-br from-primary/30 to-secondary/20 text-primary-foreground electric-glow shadow-lg'
-                  : 'bg-gradient-to-br from-primary/10 to-secondary/5 text-primary/80 group-hover:bg-gradient-to-br group-hover:from-primary/20 group-hover:to-secondary/15 group-hover:text-primary group-hover:electric-glow group-hover:shadow-md'
-              }`}>
-                <Settings className={`transition-all duration-500 ${collapsed ? 'h-6 w-6' : 'h-5 w-5'} group-hover:rotate-90 ${location.pathname === '/settings' ? 'animate-pulse' : 'group-hover:scale-110'}`} />
-              </div>
-              {!collapsed && (
-                <div className="relative z-10 flex-1">
-                  <span className="transition-all duration-500 text-sm font-semibold tracking-wide">
-                    Settings
-                  </span>
-                  {location.pathname === '/settings' && (
-                    <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent animate-electric-pulse"></div>
-                  )}
-                </div>
-              )}
-              {location.pathname === '/settings' && (
-                <>
-                  <div className={`absolute ${collapsed ? 'right-1.5 top-1.5' : 'right-4 top-1/2 transform -translate-y-1/2'} w-2.5 h-2.5 bg-gradient-to-r from-accent to-secondary rounded-full animate-electric-pulse shadow-accent-glow`}></div>
-                  {!collapsed && (
-                    <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary to-transparent opacity-60"></div>
-                  )}
-                </>
-              )}
-            </Link>
-          </nav>
+
         </div>
       </div>
-
-      {/* Enhanced User Section */}
-      <div className="bg-gradient-to-r from-primary/8 to-secondary/8 flex-shrink-0 relative z-10 border-t border-primary/10">
-        <div className={`transition-all duration-700 ${collapsed ? 'p-3' : 'p-4'}`}>
-          {collapsed ? (
-            <div className="space-y-3">
-              {/* Enhanced Collapsed User Avatar */}
-              <div className="flex justify-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-primary via-secondary to-accent rounded-2xl flex items-center justify-center text-white font-bold electric-glow animate-glow-pulse shadow-lg ring-2 ring-primary/20">
-                  {user?.name?.charAt(0) || "U"}
-                </div>
-              </div>
-              {/* Enhanced Collapsed Sign Out Button */}
-              <button
-                onClick={logout}
-                className="group w-full flex items-center justify-center p-3.5 rounded-2xl transition-all duration-500 relative overflow-hidden hover-electric electric-inactive hover:electric-hover hover:text-destructive text-foreground/90 hover:transform hover:scale-[1.05]"
-                title="Sign Out"
-              >
-                <div className="relative z-10 p-2 rounded-xl bg-gradient-to-br from-destructive/10 to-destructive/5 text-destructive/80 group-hover:bg-gradient-to-br group-hover:from-destructive/20 group-hover:to-destructive/15 group-hover:text-destructive group-hover:electric-glow group-hover:shadow-md">
-                  <LogOut className="h-6 w-6 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-12" />
-                </div>
-              </button>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {/* Enhanced User Profile Section */}
-              <div className="flex items-center gap-4 px-5 py-4 rounded-2xl bg-gradient-to-r from-primary/15 via-secondary/10 to-accent/15 electric-profile relative overflow-hidden border border-primary/10 hover:border-primary/20 transition-all duration-500">
-                <div className="absolute inset-0 bg-cyber-grid opacity-25"></div>
-                <div className="w-12 h-12 bg-gradient-to-r from-primary via-secondary to-accent rounded-2xl flex items-center justify-center text-white font-bold electric-glow animate-glow-pulse relative z-10 shadow-lg">
-                  {user?.name?.charAt(0) || "U"}
-                </div>
-                <div className="flex-1 min-w-0 relative z-10">
-                  <div className="text-sm font-bold truncate text-foreground tracking-wide">{user?.name || "User"}</div>
-                  <div className="text-xs text-accent/80 truncate font-medium">{user?.role || "User"}</div>
-                  <div className="mt-1 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-                </div>
-              </div>
-
-              {/* Enhanced Sign Out Button */}
-              <button
-                onClick={logout}
-                className="group w-full flex items-center gap-5 px-5 py-4 rounded-2xl transition-all duration-500 relative overflow-hidden hover-electric electric-inactive hover:electric-hover hover:text-destructive text-foreground/90 hover:transform hover:scale-[1.02] border border-destructive/10 hover:border-destructive/20"
-              >
-                <div className="relative z-10 p-2 rounded-xl bg-gradient-to-br from-destructive/10 to-destructive/5 text-destructive/80 group-hover:bg-gradient-to-br group-hover:from-destructive/20 group-hover:to-destructive/15 group-hover:text-destructive group-hover:electric-glow group-hover:shadow-md">
-                  <LogOut className="h-5 w-5 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-12" />
-                </div>
-                <span className="relative z-10 text-sm font-semibold tracking-wide">Sign Out</span>
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
