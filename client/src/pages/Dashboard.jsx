@@ -164,9 +164,13 @@ function Dashboard() {
               <div className="absolute bottom-12 right-8 w-1 h-1 bg-cyan-300 rounded-full opacity-50"></div>
             </div>
 
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 relative z-10">
+            <div className={`flex flex-col items-start justify-between relative z-10 transition-all duration-700 ${
+              !isHidden 
+                ? 'lg:flex-row lg:items-start gap-6' 
+                : 'xl:flex-row xl:items-center gap-8'
+            }`}>
               {/* Dashboard Title Section */}
-              <div className="space-y-4">
+              <div className={`flex-1 ${!isHidden ? 'space-y-3' : 'space-y-4'}`}>
                 <div className="flex items-center gap-4">
                   {/* Dashboard Icon */}
                   <div className="relative">
@@ -174,41 +178,57 @@ function Dashboard() {
                     <div className="relative w-14 h-14 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 backdrop-blur-md border border-cyan-400/30 rounded-xl flex items-center justify-center shadow-xl">
                       <div className="w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center shadow-inner">
                         <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
                       </div>
                     </div>
                   </div>
                   
                   <div className="space-y-2">
-                    <h1 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">
+                    <h1 className={`font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg transition-all duration-300 ${
+                      !isHidden ? 'text-4xl xl:text-5xl' : 'text-5xl'
+                    }`}>
                       Dashboard
                     </h1>
                     <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-60"></div>
                   </div>
                 </div>
                 
-                <div className="space-y-2">
-                  <p className="text-xl text-white/90 font-medium">
+                <div className={`${!isHidden ? 'space-y-1' : 'space-y-2'}`}>
+                  <p className={`text-white/90 font-medium transition-all duration-300 ${
+                    !isHidden ? 'text-lg' : 'text-lg xl:text-xl'
+                  }`}>
                     Welcome back, <span className="text-cyan-400 font-semibold">{user?.name}</span>!
                   </p>
-                  <p className="text-base text-white/70">
+                  <p className={`text-white/70 transition-all duration-300 ${
+                    !isHidden ? 'text-sm' : 'text-sm xl:text-base'
+                  }`}>
                     Here's an overview of your workflow and system performance.
                   </p>
                 </div>
               </div>
 
-              {/* Enhanced Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              {/* Enhanced Action Buttons - Responsive to sidebar */}
+              <div className={`transition-all duration-700 ${
+                !isHidden 
+                  ? 'grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg' 
+                  : 'flex flex-col sm:flex-row gap-3 w-full sm:w-auto'
+              }`}>
                 {/* Create Task Button - Primary */}
                 <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/40 via-blue-500/40 to-purple-500/40 rounded-xl blur-sm group-hover:blur-md transition-all duration-300"></div>
+                  <div className={`absolute inset-0 bg-gradient-to-r from-cyan-400/40 via-blue-500/40 to-purple-500/40 rounded-xl transition-all duration-300 ${
+                    !isHidden ? 'opacity-0' : 'blur-sm group-hover:blur-md'
+                  }`}></div>
                   <Button 
                     onClick={() => setIsCreateTaskOpen(true)} 
-                    className="relative h-12 px-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 border border-cyan-400/50 shadow-xl hover:shadow-cyan-400/30 transition-all duration-300 hover:scale-105 text-white font-semibold"
+                    className={`relative bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 border border-cyan-400/50 transition-all duration-300 hover:scale-105 text-white font-semibold ${
+                      !isHidden 
+                        ? 'h-10 px-4 text-sm shadow-none' 
+                        : 'h-10 px-4 xl:h-12 xl:px-6 shadow-xl hover:shadow-cyan-400/30'
+                    }`}
                   >
-                    <Plus className="h-5 w-5 mr-2" />
-                    Create New Task
+                    <Plus className={`mr-2 ${!isHidden ? 'h-4 w-4' : 'h-4 w-4 xl:h-5 xl:w-5'}`} />
+                    <span className={`${!isHidden ? 'block' : 'hidden sm:block'}`}>Create New Task</span>
                   </Button>
                 </div>
 
@@ -216,55 +236,73 @@ function Dashboard() {
                   <>
                     {/* Broadcast Reminders Button */}
                     <div className="relative group">
-                      <div className="absolute inset-0 bg-gradient-to-r from-orange-400/30 to-red-500/30 rounded-xl blur-sm group-hover:blur-md transition-all duration-300"></div>
+                      <div className={`absolute inset-0 bg-gradient-to-r from-orange-400/30 to-red-500/30 rounded-xl transition-all duration-300 ${
+                        !isHidden ? 'opacity-0' : 'blur-sm group-hover:blur-md'
+                      }`}></div>
                       <Button
                         variant="secondary"
                         onClick={handleBroadcastReminders}
                         disabled={isSendingReminders}
-                        className="relative h-12 px-6 bg-gradient-to-r from-orange-500/20 to-red-500/20 backdrop-blur-md border border-orange-400/40 hover:border-orange-400/60 shadow-lg hover:shadow-orange-400/20 transition-all duration-300 hover:scale-105 text-white font-medium"
+                        className={`relative bg-gradient-to-r from-orange-500/20 to-red-500/20 backdrop-blur-md border border-orange-400/40 hover:border-orange-400/60 transition-all duration-300 hover:scale-105 text-white font-medium ${
+                          !isHidden 
+                            ? 'h-10 px-4 text-sm shadow-none' 
+                            : 'h-10 px-4 xl:h-12 xl:px-6 shadow-lg hover:shadow-orange-400/20'
+                        }`}
                       >
                         {isSendingReminders ? (
-                          <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                          <Loader2 className={`mr-2 animate-spin ${!isHidden ? 'h-4 w-4' : 'h-4 w-4 xl:h-5 xl:w-5'}`} />
                         ) : (
-                          <Mail className="h-5 w-5 mr-2" />
+                          <Mail className={`mr-2 ${!isHidden ? 'h-4 w-4' : 'h-4 w-4 xl:h-5 xl:w-5'}`} />
                         )}
-                        Broadcast Reminders
+                        <span className={`${!isHidden ? 'block' : 'hidden sm:block'}`}>Broadcast Reminders</span>
                       </Button>
                     </div>
 
                     {/* Generate Reports Button */}
                     <div className="relative group">
-                      <div className="absolute inset-0 bg-gradient-to-r from-green-400/30 to-emerald-500/30 rounded-xl blur-sm group-hover:blur-md transition-all duration-300"></div>
+                      <div className={`absolute inset-0 bg-gradient-to-r from-green-400/30 to-emerald-500/30 rounded-xl transition-all duration-300 ${
+                        !isHidden ? 'opacity-0' : 'blur-sm group-hover:blur-md'
+                      }`}></div>
                       <Button
                         variant="outline"
                         onClick={handleGenerateReports}
                         disabled={isGeneratingReports}
-                        className="relative h-12 px-6 bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-md border border-green-400/40 hover:border-green-400/60 shadow-lg hover:shadow-green-400/20 transition-all duration-300 hover:scale-105 text-white font-medium overflow-hidden"
+                        className={`relative bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-md border border-green-400/40 hover:border-green-400/60 transition-all duration-300 hover:scale-105 text-white font-medium overflow-hidden ${
+                          !isHidden 
+                            ? 'h-10 px-4 text-sm shadow-none' 
+                            : 'h-10 px-4 xl:h-12 xl:px-6 shadow-lg hover:shadow-green-400/20'
+                        }`}
                       >
                         {isGeneratingReports ? (
-                          <Loader2 className="h-5 w-5 mr-2 animate-spin relative z-10" />
+                          <Loader2 className={`mr-2 animate-spin relative z-10 ${!isHidden ? 'h-4 w-4' : 'h-4 w-4 xl:h-5 xl:w-5'}`} />
                         ) : (
-                          <FileText className="h-5 w-5 mr-2 relative z-10" />
+                          <FileText className={`mr-2 relative z-10 ${!isHidden ? 'h-4 w-4' : 'h-4 w-4 xl:h-5 xl:w-5'}`} />
                         )}
-                        <span className="relative z-10">Generate Reports</span>
+                        <span className={`relative z-10 ${!isHidden ? 'block' : 'hidden sm:block'}`}>Generate Reports</span>
                       </Button>
                     </div>
 
                     {/* Aim Reminders Button */}
                     <div className="relative group">
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-400/30 to-pink-500/30 rounded-xl blur-sm group-hover:blur-md transition-all duration-300"></div>
+                      <div className={`absolute inset-0 bg-gradient-to-r from-purple-400/30 to-pink-500/30 rounded-xl transition-all duration-300 ${
+                        !isHidden ? 'opacity-0' : 'blur-sm group-hover:blur-md'
+                      }`}></div>
                       <Button
                         variant="warning"
                         onClick={handleBroadcastAimReminders}
                         disabled={isSendingAimReminders}
-                        className="relative h-12 px-6 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-md border border-purple-400/40 hover:border-purple-400/60 shadow-lg hover:shadow-purple-400/20 transition-all duration-300 hover:scale-105 text-white font-medium"
+                        className={`relative bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-md border border-purple-400/40 hover:border-purple-400/60 transition-all duration-300 hover:scale-105 text-white font-medium ${
+                          !isHidden 
+                            ? 'h-10 px-4 text-sm shadow-none' 
+                            : 'h-10 px-4 xl:h-12 xl:px-6 shadow-lg hover:shadow-purple-400/20'
+                        }`}
                       >
                         {isSendingAimReminders ? (
-                          <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                          <Loader2 className={`mr-2 animate-spin ${!isHidden ? 'h-4 w-4' : 'h-4 w-4 xl:h-5 xl:w-5'}`} />
                         ) : (
-                          <Target className="h-5 w-5 mr-2" />
+                          <Target className={`mr-2 ${!isHidden ? 'h-4 w-4' : 'h-4 w-4 xl:h-5 xl:w-5'}`} />
                         )}
-                        Broadcast Aim Reminders
+                        <span className={`${!isHidden ? 'block' : 'hidden sm:block'}`}>Broadcast Aim Reminders</span>
                       </Button>
                     </div>
                   </>
