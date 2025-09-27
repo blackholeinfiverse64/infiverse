@@ -4,10 +4,17 @@ import { ProfileSettings } from "../components/settings/profile-settings"
 import { WorkspaceSettings } from "../components/settings/workspace-settings"
 import { NotificationSettings } from "../components/settings/notification-settings"
 import  ConsentSettings  from "../components/settings/ConsentSettings";
+import { useSidebar } from "../context/sidebar-context"
 
 function Settings() {
+  const { isHidden } = useSidebar()
+  
   return (
-    <div className="space-y-6 electric-dashboard">
+    <div className={`space-y-6 electric-dashboard transition-all duration-700 ${
+      isHidden 
+        ? 'ml-0 p-4' 
+        : 'ml-80 p-4'
+    }`}>
       {/* Electric Background Particles */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="electric-particles opacity-20"></div>

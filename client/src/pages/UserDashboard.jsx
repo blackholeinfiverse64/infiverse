@@ -39,11 +39,13 @@ import { SubmissionFeedbackCard } from "../components/dashboard/SubmissionFeedba
 import { DashboardProvider } from "../context/DashboardContext" // New import
 import { api } from "@/lib/api"
 import { WorkHoursManager } from "../components/monitoring/WorkHoursManager"
+import { useSidebar } from "../context/sidebar-context"
 
 function UserDashboard() {
   const navigate = useNavigate()
   const { toast } = useToast()
   const { user } = useAuth()
+  const { isHidden } = useSidebar()
   const [isCreateTaskOpen, setIsCreateTaskOpen] = useState(false)
   const [userStats, setUserStats] = useState({
     totalTasks: 0,
@@ -284,7 +286,11 @@ function UserDashboard() {
       hasNewReviews={hasNewReviews}
       markReviewsAsSeen={markReviewsAsSeen}
     >
-      <div className="space-y-6 electric-dashboard">
+      <div className={`space-y-6 electric-dashboard transition-all duration-700 ${
+        isHidden 
+          ? 'ml-0 p-4' 
+          : 'ml-80 p-4'
+      }`}>
         {/* Electric Background Particles */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
           <div className="electric-particles opacity-20"></div>

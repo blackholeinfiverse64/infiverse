@@ -2,8 +2,10 @@ import { useState } from "react";
 import { DepartmentList } from "../components/departments/department-list";
 import { DepartmentHeader } from "../components/departments/department-header";
 import { DepartmentDetails } from "../components/departments/DepartmentDetails";
+import { useSidebar } from "../context/sidebar-context"
 
 function Departments() {
+  const { isHidden } = useSidebar()
   const [selectedDepartment, setSelectedDepartment] = useState(null);
 
   const handleDepartmentSelect = (department) => {
@@ -24,7 +26,11 @@ function Departments() {
   }
 
   return (
-    <div className="space-y-6 electric-dashboard">
+    <div className={`space-y-6 electric-dashboard transition-all duration-700 ${
+      isHidden 
+        ? 'ml-0 p-4' 
+        : 'ml-80 p-4'
+    }`}>
       {/* Electric Background Particles */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="electric-particles opacity-20"></div>

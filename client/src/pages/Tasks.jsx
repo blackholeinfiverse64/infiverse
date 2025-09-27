@@ -4,8 +4,10 @@ import { useState } from "react"
 import { TasksHeader } from "../components/tasks/tasks-header"
 import { TasksList } from "../components/tasks/tasks-list"
 import { TaskFilters } from "../components/tasks/task-filters"
+import { useSidebar } from "../context/sidebar-context"
 
 function Tasks() {
+  const { isHidden } = useSidebar()
   const [filters, setFilters] = useState({
     status: [],
     department: [],
@@ -17,7 +19,11 @@ function Tasks() {
   }
 
   return (
-    <div className="h-screen flex flex-col space-y-6 overflow-y-auto electric-dashboard">
+    <div className={`h-screen flex flex-col space-y-6 overflow-y-auto electric-dashboard transition-all duration-700 ${
+      isHidden 
+        ? 'ml-0' 
+        : 'ml-80'
+    }`}>
       {/* Electric Background Particles */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="electric-particles opacity-20"></div>

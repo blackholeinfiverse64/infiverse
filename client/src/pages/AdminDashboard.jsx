@@ -25,6 +25,7 @@ import {
 import { Label } from "@/components/ui/label"
 import { useToast } from "../hooks/use-toast"
 import { API_URL } from "@/lib/api"
+import { useSidebar } from "../context/sidebar-context"
 
 // Configure axios with base URL
 const api = axios.create({
@@ -381,12 +382,18 @@ const AdminDashboard = () => {
     return users.filter((user) => user.department === departmentId)
   }
 
+  const { isHidden } = useSidebar()
+  
   const getDepartmentLead = (leadId) => {
     return users.find((user) => user._id === leadId)
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <div className={`min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 transition-all duration-700 ${
+      isHidden 
+        ? 'ml-0' 
+        : 'ml-80'
+    }`}>
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
