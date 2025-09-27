@@ -84,7 +84,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search } from "lucide-react"
+import { Search, Menu } from "lucide-react"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import {
@@ -96,19 +96,22 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
-import { ModeToggle } from "../mode-toggle"
 import { NotificationsPopover } from "../notifications/notifications-popover"
 import { useAuth } from "../../context/auth-context"
+import { useSidebar } from "../../context/sidebar-context"
 import { MobileMenuButton } from "../ui/mobile-menu-button"
 import { EnhancedSearch } from "./enhanced-search"
 import { UserDetailsModal } from "./user-details-modal"
 import { Alerts } from "../notifications/Alerts";
+
+
 
 export function DashboardHeader() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedUser, setSelectedUser] = useState(null)
   const [showUserModal, setShowUserModal] = useState(false)
   const { user, logout } = useAuth()
+  const { isHidden } = useSidebar()
 
   const handleUserSelect = (selectedUser) => {
     setSelectedUser(selectedUser)
@@ -116,82 +119,108 @@ export function DashboardHeader() {
   }
 
   return (
-    <header className="w-full h-18 border-b border-border/30 bg-background/95 backdrop-blur-xl neo-card shadow-neo-light">
-      <div className="flex h-full items-center justify-between px-4 md:px-8 relative ml-20">
-        {/* Content starts with margin to account for black hole button */}
+    <header className="fixed top-0 left-0 right-0 w-full h-20 bg-gradient-to-r from-black/40 via-slate-900/50 to-black/40 backdrop-blur-xl border-b border-white/10 shadow-2xl z-40">
+      <div className="flex h-full items-center justify-between px-2 md:px-4 relative">
+        {/* Left spacer - Aligned with black hole logo */}
+        <div className="flex items-center">
+          <div className="w-16"></div>
+        </div>
 
-        {/* Enhanced Search Bar */}
-        <EnhancedSearch onUserSelect={handleUserSelect} />
+        {/* Right-aligned content with enhanced styling */}
+        <div className="flex items-center space-x-2 md:space-x-3 pr-2 md:pr-4">
+          {/* Enhanced Search Bar - Compact for full screen */}
+          <div className="relative flex-1 max-w-md">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/30 via-blue-500/40 to-purple-600/30 rounded-xl blur-sm animate-electric-pulse"></div>
+            <div className="relative bg-black/60 backdrop-blur-xl border border-cyan-400/40 rounded-xl shadow-xl hover:shadow-cyan-400/20 transition-all duration-300 hover:border-blue-500/50">
+              <EnhancedSearch onUserSelect={handleUserSelect} />
+            </div>
+          </div>
 
-        {/* Enhanced Right Side Actions */}
-        <div className="flex flex-1 items-center justify-end space-x-3">
-          <NotificationsPopover />
-          <Alerts />
-          <ModeToggle />
+          {/* Enhanced Action Buttons */}
+          <div className="flex items-center space-x-2">
+            {/* Enhanced Notifications - Compact */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/30 via-blue-500/40 to-purple-600/30 rounded-lg blur-sm animate-electric-pulse"></div>
+              <div className="relative backdrop-blur-md bg-black/40 rounded-lg border border-blue-400/30 hover:border-cyan-400/50 transition-all duration-300">
+                <NotificationsPopover />
+              </div>
+            </div>
+            
+            {/* Enhanced Alerts - Compact */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-400/30 via-red-500/40 to-pink-500/30 rounded-lg blur-sm animate-electric-pulse"></div>
+              <div className="relative backdrop-blur-md bg-black/40 rounded-lg border border-orange-400/30 hover:border-red-400/50 transition-all duration-300">
+                <Alerts />
+              </div>
+            </div>
+          </div>
 
-          {/* Enhanced User Menu */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full hover-lift transition-all duration-300 hover:shadow-glow">
-                <Avatar className="h-9 w-9 ring-2 ring-primary/20 transition-all duration-300 hover:ring-primary/40">
-                  <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
-                  <AvatarFallback className="bg-gradient-primary text-white font-semibold">
-                    {user?.name?.charAt(0) || "U"}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 bg-green-500 rounded-full border-2 border-background"></div>
-              </Button>
-            </DropdownMenuTrigger>
+          {/* Enhanced User Menu - Compact */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/30 via-blue-500/40 to-purple-600/30 rounded-full blur-sm animate-electric-pulse"></div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-12 w-12 rounded-full backdrop-blur-md bg-black/50 hover:bg-black/70 border border-cyan-400/40 hover:border-blue-500/60 transition-all duration-300 shadow-xl hover:shadow-cyan-400/20 hover:scale-105">
+                  <Avatar className="h-9 w-9 ring-1 ring-cyan-400/50 hover:ring-blue-500/70 transition-all duration-300">
+                    <AvatarImage src="/placeholder.svg?height=36&width=36" alt="User" />
+                    <AvatarFallback className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 text-white font-bold shadow-inner">
+                      {user?.name?.charAt(0) || "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full border border-black/60 shadow-lg animate-pulse"></div>
+                </Button>
+              </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-64 bg-background/95 backdrop-blur-xl border border-border/50 shadow-modern rounded-xl p-2 animate-scale-in"
+              className="w-64 backdrop-blur-xl bg-black/20 border border-white/20 shadow-2xl rounded-xl p-3 animate-scale-in"
               align="end"
               forceMount
             >
-              <DropdownMenuLabel className="font-normal p-3">
-                <div className="flex flex-col space-y-2">
+              <DropdownMenuLabel className="font-normal p-4 text-white">
+                <div className="flex flex-col space-y-3">
                   <div className="flex items-center space-x-3">
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src="/placeholder.svg?height=40&width=40" alt="User" />
-                      <AvatarFallback className="bg-gradient-primary text-black">
+                    <Avatar className="h-12 w-12 ring-2 ring-blue-400/50">
+                      <AvatarImage src="/placeholder.svg?height=48&width=48" alt="User" />
+                      <AvatarFallback className="bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold text-lg">
                         {user?.name?.charAt(0) || "U"}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold leading-none truncate">{user?.name || "User"}</p>
-                      <p className="text-xs leading-none text-muted-foreground mt-1 truncate">{user?.email || "user@example.com"}</p>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary mt-1">
+                      <p className="text-sm font-semibold leading-none truncate text-white">{user?.name || "User"}</p>
+                      <p className="text-xs leading-none text-blue-200 mt-1 truncate">{user?.email || "user@example.com"}</p>
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 mt-2 border border-blue-400/30">
                         {user?.role || "User"}
                       </span>
                     </div>
                   </div>
                 </div>
               </DropdownMenuLabel>
-              <DropdownMenuSeparator className="my-2" />
-              <DropdownMenuItem className="rounded-lg transition-colors duration-200 hover:bg-primary/10">
-                <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <DropdownMenuSeparator className="my-2 bg-white/20" />
+              <DropdownMenuItem className="rounded-xl transition-all duration-300 hover:bg-white/10 text-white hover:text-blue-300 focus:bg-white/10 focus:text-blue-300 p-3 my-1">
+                <svg className="mr-3 h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                Profile
+                <span className="font-medium">Profile</span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="rounded-lg transition-colors duration-200 hover:bg-primary/10">
-                <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <DropdownMenuItem className="rounded-xl transition-all duration-300 hover:bg-white/10 text-white hover:text-blue-300 focus:bg-white/10 focus:text-blue-300 p-3 my-1">
+                <svg className="mr-3 h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                Settings
+                <span className="font-medium">Settings</span>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="my-2" />
+              <DropdownMenuSeparator className="my-2 bg-white/20" />
               <DropdownMenuItem
                 onClick={logout}
-                className="rounded-lg transition-colors duration-200 hover:bg-destructive/10 text-destructive focus:text-destructive"
+                className="rounded-xl transition-all duration-300 hover:bg-red-500/20 text-red-400 hover:text-red-300 focus:bg-red-500/20 focus:text-red-300 p-3 my-1"
               >
-                <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
-                Log out
+                <span className="font-medium">Log out</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          </div>
         </div>
       </div>
 

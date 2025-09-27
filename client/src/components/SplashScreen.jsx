@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import blackholeImage from '../assets/blackhole.png'
 
 export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true)
@@ -46,13 +47,17 @@ export default function SplashScreen() {
       
       {/* Main content */}
       <div className="splash-content">
-        {/* 3D Title */}
-        <div className="splash-title-container">
-          <h1 className="splash-title">
-            <span className="title-word blackhole">Blackhole</span>
-            <span className="title-word infiverse">Infiverse</span>
-          </h1>
-          <div className="title-glow"></div>
+        {/* Black Hole Image */}
+        <div className="splash-blackhole-container">
+          <div className="blackhole-image-wrapper">
+            <img 
+              src={blackholeImage} 
+              alt="Black Hole" 
+              className="blackhole-image"
+            />
+            <div className="electric-border"></div>
+            <div className="electric-glow"></div>
+          </div>
         </div>
 
         {/* Animated tagline */}

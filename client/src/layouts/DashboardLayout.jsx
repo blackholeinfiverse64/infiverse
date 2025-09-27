@@ -6,6 +6,7 @@ import { DashboardSidebar } from "../components/dashboard/sidebar"
 import { DashboardHeader } from "../components/dashboard/header"
 import EnhancedStartDayDialog from "../components/attendance/EnhancedStartDayDialog"
 import { useAuth } from "../context/auth-context"
+import { SidebarProvider } from "../context/sidebar-context"
 import api from "../lib/api"
 
 export function DashboardLayout() {
@@ -54,47 +55,45 @@ export function DashboardLayout() {
 
 
   return (
-    <div className="min-h-screen bg-background flex overflow-hidden electric-layout universe-background">
-      {/* Enhanced Universe Background Elements */}
-      <div className="fixed inset-0 universe-particles opacity-15 pointer-events-none"></div>
-      <div className="fixed inset-0 universe-particles-medium opacity-10 pointer-events-none"></div>
-      <div className="fixed inset-0 universe-particles-large opacity-5 pointer-events-none"></div>
-      
-      <div className="fixed inset-0 bg-cyber-grid opacity-15 pointer-events-none"></div>
-      <div className="fixed inset-0 gradient-cyber opacity-10 pointer-events-none"></div>
-      
-      {/* Electric particles for main layout */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="electric-particles opacity-20"></div>
-        <div className="electric-particles-small opacity-15"></div>
-      </div>
-
-
-
-      {/* New Sidebar - Always renders for both desktop and mobile */}
-      <DashboardSidebar />
-
-      {/* Main Content Container */}
-      <div className="flex flex-col flex-1 overflow-hidden">
-        {/* Fixed Header */}
-        <div className="flex-shrink-0 z-40">
-          <DashboardHeader />
+    <SidebarProvider>
+      <div className="min-h-screen bg-background flex overflow-hidden electric-layout universe-background">
+        {/* Enhanced Universe Background Elements */}
+        <div className="fixed inset-0 universe-particles opacity-15 pointer-events-none"></div>
+        <div className="fixed inset-0 universe-particles-medium opacity-10 pointer-events-none"></div>
+        <div className="fixed inset-0 universe-particles-large opacity-5 pointer-events-none"></div>
+        
+        <div className="fixed inset-0 bg-cyber-grid opacity-15 pointer-events-none"></div>
+        <div className="fixed inset-0 gradient-cyber opacity-10 pointer-events-none"></div>
+        
+        {/* Electric particles for main layout */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="electric-particles opacity-20"></div>
+          <div className="electric-particles-small opacity-15"></div>
         </div>
 
-        {/* Main Content Area */}
-        <main className="flex-1 overflow-auto bg-background relative">
-          <div className="h-full p-4 md:p-6 lg:p-8 relative z-10 ml-4">
-            <div className="max-w-full mx-auto animate-fade-in">
-              <Outlet />
-              <EnhancedStartDayDialog
-                isOpen={showStartDayDialog}
-                onClose={() => setShowStartDayDialog(false)}
-                onSuccess={handleStartDaySuccess}
-              />
+        {/* New Sidebar - Always renders for both desktop and mobile */}
+        <DashboardSidebar />
+
+        {/* Fixed Header */}
+        <DashboardHeader />
+
+        {/* Main Content Container */}
+        <div className="flex flex-col flex-1 overflow-hidden">
+          {/* Main Content Area - Account for fixed header - Full screen layout */}
+          <main className="flex-1 overflow-auto bg-background relative pt-20">
+            <div className="h-full p-2 md:p-4 relative z-10">
+              <div className="w-full animate-fade-in">
+                <Outlet />
+                <EnhancedStartDayDialog
+                  isOpen={showStartDayDialog}
+                  onClose={() => setShowStartDayDialog(false)}
+                  onSuccess={handleStartDaySuccess}
+                />
+              </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
-    </div>
+    </SidebarProvider>
   )
 }

@@ -1,10 +1,10 @@
 import { useLocation, Link } from "react-router-dom";
 import { LayoutDashboard, CheckSquare, Network, Users, Sparkles, Settings, CheckCircle, BarChart, Airplay, LayoutDashboardIcon, Target, Monitor, DollarSign, Calendar, Clock, UserCog, UserCheck } from "lucide-react";
 import { useAuth } from "../../context/auth-context";
-import { useState } from "react";
+import { useSidebar } from "../../context/sidebar-context";
 
 export function DashboardSidebar({ collapsed = false, onToggleCollapse }) {
-  const [isHidden, setIsHidden] = useState(false);
+  const { isHidden, toggleSidebar } = useSidebar();
   const location = useLocation();
   const { user } = useAuth();
 
@@ -48,17 +48,15 @@ export function DashboardSidebar({ collapsed = false, onToggleCollapse }) {
     renderRoutes = baseRoutes; // For other roles like Manager, etc.
   }
 
-  const toggleSidebar = () => {
-    setIsHidden(!isHidden);
-  };
+
 
   return (
     <>
-      {/* Black Hole Toggle Button - Always Visible */}
-      <div className="fixed top-6 left-6 z-50">
+      {/* Black Hole Toggle Button - Sized for header alignment */}
+      <div className="fixed top-4 left-4 z-50">
         <button
           onClick={toggleSidebar}
-          className="relative w-16 h-16 rounded-full overflow-hidden group transition-all duration-700 hover:scale-110"
+          className="relative w-12 h-12 rounded-full overflow-hidden group transition-all duration-700 hover:scale-110"
         >
           {/* Black Hole Image */}
           <img 

@@ -95,14 +95,6 @@ export function EnhancedSearch({ onUserSelect }) {
         onChange={handleInputChange}
         onFocus={() => searchQuery && setIsOpen(true)}
       />
-      
-      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 z-10">
-        <div className="w-6 h-6 gradient-primary rounded-lg flex items-center justify-center opacity-50 group-focus-within:opacity-100 transition-cyber">
-          <svg className="w-3 h-3 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        </div>
-      </div>
 
       {/* Search Suggestions */}
       {isOpen && (suggestions.length > 0 || loading) && (
