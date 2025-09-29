@@ -306,6 +306,24 @@
     animation: electric-pulse 2s ease-in-out infinite;
   }
 
+  /* New revolving particle animations */
+  .animate-spin-slow {
+    animation: spin 30s linear infinite;
+  }
+
+  .animate-reverse-spin {
+    animation: spin 25s linear infinite reverse;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   /* Blue Electric Particles */
   .electric-particles-blue {
     position: absolute;

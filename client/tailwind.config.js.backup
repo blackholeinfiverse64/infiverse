@@ -1,7 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{js,jsx}", "./components/**/*.{js,jsx}", "./app/**/*.{js,jsx}", "./src/**/*.{js,jsx}"],
+  content: ["./pages/**/*.{js,jsx}", "./components/**/*.{js,jsx}", "./app/**/*.{js,jsx}", "./sr  			'float': 'float 3s ease-in-out infinite',
+  			'float-cyber': 'float-cyber 3s ease-in-out infinite',
+  			'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+  			'spin-slow': 'spin-slow 3s linear infinite',
+  			'spin-slower': 'spin-slower 6s linear infinite'
+  		}.{js,jsx}"],
   theme: {
   	container: {
   		center: true,
@@ -170,14 +175,6 @@ export default {
   			'glow-pulse': {
   				'0%, 100%': { boxShadow: 'var(--glow-primary)' },
   				'50%': { boxShadow: 'var(--glow-cyber)' }
-  			},
-  			'spin-slow': {
-  				'0%': { transform: 'rotate(0deg)' },
-  				'100%': { transform: 'rotate(360deg)' }
-  			},
-  			'spin-slower': {
-  				'0%': { transform: 'rotate(0deg)' },
-  				'100%': { transform: 'rotate(-360deg)' }
   			}
   		},
   		animation: {
@@ -190,11 +187,20 @@ export default {
   			'scale-in': 'scale-in 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
   			'float': 'float 3s ease-in-out infinite',
   			'float-cyber': 'float-cyber 3s ease-in-out infinite',
-  			'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
-  			'spin-slow': 'spin-slow 3s linear infinite',
-  			'spin-slower': 'spin-slower 6s linear infinite'
+  						'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+			'spin-slow': 'spin-slow 3s linear infinite',
+			'spin-slower': 'spin-slower 6s linear infinite'
+		}
   		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
 }
+//  /** @type {import('tailwindcss').Config} */
+//  export default {
+// 	content: ["./src/**/*.{html,js}"],
+// 	theme: {
+// 	  extend: {},
+// 	},
+// 	plugins: [],
+//   }
